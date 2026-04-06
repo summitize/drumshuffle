@@ -33,6 +33,7 @@
             </div>
             <div class="nav-links">
                 <a href="#hero">Home</a>
+                <a href="#simulator">Simulator</a>
                 <a href="#videos">Videos</a>
                 <a href="#feedback">Feedback</a>
                 <button id="theme-toggle" aria-label="Toggle Theme">
@@ -57,8 +58,8 @@
                 <p>
 
                 <div class="action-buttons">
-                    <a href="upi://pay?pa=9822025420@fam&pn=Drumshuffle&cu=INR" class="btn btn-primary" target="_blank"
-                        rel="noopener noreferrer">
+                    <a href="upi://pay?pa=9822025420@fam&pn=Drumshuffle&cu=INR" class="btn btn-primary"
+                        target="https://buymeacoffee.com/drumshuffleofficial" rel="noopener noreferrer">
                         <i data-feather="coffee"></i> Buy me a coffee
                     </a>
                     <a href="https://www.youtube.com/results?search_query=drumshuffle" class="btn btn-glass"
@@ -79,6 +80,61 @@
             </div>
         </section>
 
+        <!-- Drum Simulator Section -->
+        <section id="simulator" class="simulator-section">
+            <h2 class="section-title">Alesis Nitro Max Simulator</h2>
+            <div class="liquid-card simulator-container">
+                <div class="simulator-controls">
+                    <button id="record-btn" class="btn btn-glass">
+                        <i data-feather="circle" class="text-red"></i> Record MIDI (Demo)
+                    </button>
+                    <button id="play-btn" class="btn btn-glass" disabled>
+                        <i data-feather="play"></i> Play Recording
+                    </button>
+                    <span id="record-status" class="record-status">Ready</span>
+                </div>
+                <p class="simulator-hint">Uses Web Audio Synthesis. Best on Desktop with Keyboard.</p>
+                <div class="drum-grid">
+                    <div class="drum-pad-wrapper">
+                        <div class="drum-pad" data-sound="crash" data-key="q">
+                            <span class="pad-label">Crash</span>
+                            <span class="key-hint">Q</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper">
+                        <div class="drum-pad" data-sound="hihat" data-key="w">
+                            <span class="pad-label">Hi-Hat</span>
+                            <span class="key-hint">W</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper">
+                        <div class="drum-pad" data-sound="tom1" data-key="e">
+                            <span class="pad-label">Tom 1</span>
+                            <span class="key-hint">E</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper">
+                        <div class="drum-pad" data-sound="tom2" data-key="r">
+                            <span class="pad-label">Tom 2</span>
+                            <span class="key-hint">R</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper">
+                        <div class="drum-pad" data-sound="snare" data-key="a">
+                            <span class="pad-label">Snare</span>
+                            <span class="key-hint">A</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper">
+                        <div class="drum-pad" data-sound="kick" data-key="s">
+                            <span class="pad-label">Kick</span>
+                            <span class="key-hint">S</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Videos Section -->
         <section id="videos" class="videos-section">
             <h2 class="section-title">Latest & Greatest</h2>
@@ -91,8 +147,11 @@
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                     </div>
-                    <h3>Top Drum Covers</h3>
-                    <p>Playing intricate shuffles through classic rock and pop songs.</p>
+                    <h3>Top Drumless Visualisers</h3>
+                    <p>HD quality 360kbps drumless stemmed audio edited through Moises and Bandlab with startup count
+                        down in some, providing seamless audio for clean drum practice, along with interactive audio
+                        spectrum and visualisers with striking designs that catch the eye, seperating these covers from
+                        the others.</p>
                 </div>
                 <!-- YouTube Playlist 2 -->
                 <div class="liquid-card video-card">
@@ -102,8 +161,8 @@
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                     </div>
-                    <h3>Shorts & Practice Routine</h3>
-                    <p>My daily warmup routine and quick drumming shorts.</p>
+                    <h3>Drum Covers</h3>
+                    <p>Complete set of videos of drum covers of my favourite songs.</p>
                 </div>
             </div>
         </section>
@@ -112,7 +171,8 @@
         <section id="feedback" class="feedback-section">
             <div class="liquid-card form-card">
                 <h2 class="section-title">Get In Touch</h2>
-                <p>Have a song request, feedback on my covers, or just want to talk music?</p>
+                <p>Have a song request, feedback on my covers, or just want to talk music?(Please note that this feature
+                    is still under development and will function after the first few Beta Versions)</p>
                 <form id="contact-form">
                     <div class="form-group">
                         <label for="name">Your Name</label>
@@ -135,7 +195,7 @@
     </main>
 
     <footer class="glass-footer">
-        <p>&copy; 2026 Drumshuffle. Designed with precision and rhythm.</p>
+        <p>&copy; 2026 Drumshuffle. Designed with precision and rhythm.For Drummers, By Drummers</p>
     </footer>
 
     <!-- Modular JS Scripts -->

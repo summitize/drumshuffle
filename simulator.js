@@ -1,10 +1,11 @@
-// Simple Web Audio API Synthesizer for Drum Sounds
+// Web Audio API Synthesizer for Drum Sounds
 let audioCtx;
 let recordedNotes = [];
 let isRecording = false;
 let startTime;
+let isPlaying = false;
 
-// Frequencies for a synthesized drum kit
+// Synthesizer settings
 const drumKit = {
     'kick': { type: 'kick', freq: 150, decay: 0.5 },
     'snare': { type: 'snare', freq: 250, decay: 0.2 },
@@ -14,15 +15,23 @@ const drumKit = {
     'crash': { type: 'hihat', freq: 800, decay: 1.5 }
 };
 
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    return audioCtx;
+}
+
 function playSound(soundName) {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
+    const ctx = initAudio();
     const settings = drumKit[soundName];
-    if(!settings) return;
+    if (!settings) return;
 
-    const time = audioCtx.currentTime;
+    const time = ctx.currentTime;
 
-    // Record the note if recording
     if (isRecording) {
         recordedNotes.push({
             sound: soundName,
@@ -31,10 +40,10 @@ function playSound(soundName) {
     }
 
     if (settings.type === 'kick') {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
         
         osc.frequency.setValueAtTime(settings.freq, time);
         osc.frequency.exponentialRampToValueAtTime(0.01, time + settings.decay);
@@ -46,56 +55,56 @@ function playSound(soundName) {
         osc.stop(time + settings.decay);
     } 
     else if (settings.type === 'snare') {
-        // Simple noise burst for snare
-        const bufferSize = audioCtx.sampleRate * settings.decay;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const bufferSize = ctx.sampleRate * settings.decay;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
             data[i] = Math.random() * 2 - 1;
         }
         
-        const noise = audioCtx.createBufferSource();
+        const noise = ctx.createBufferSource();
         noise.buffer = buffer;
         
-        const noiseFilter = audioCtx.createBiquadFilter();
+        const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = 'highpass';
         noiseFilter.frequency.value = 1000;
         noise.connect(noiseFilter);
         
-        const gain = audioCtx.createGain();
+        const gain = ctx.createGain();
         noiseFilter.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
         
         gain.gain.setValueAtTime(1, time);
         gain.gain.exponentialRampToValueAtTime(0.01, time + settings.decay);
         
         noise.start(time);
+        noise.stop(time + settings.decay);
     }
     else if (settings.type === 'hihat') {
-        // High frequency noise
-        const bufferSize = audioCtx.sampleRate * settings.decay;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const bufferSize = ctx.sampleRate * settings.decay;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
             data[i] = Math.random() * 2 - 1;
         }
         
-        const noise = audioCtx.createBufferSource();
+        const noise = ctx.createBufferSource();
         noise.buffer = buffer;
         
-        const noiseFilter = audioCtx.createBiquadFilter();
+        const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = 'bandpass';
         noiseFilter.frequency.value = 10000;
         noise.connect(noiseFilter);
         
-        const gain = audioCtx.createGain();
+        const gain = ctx.createGain();
         noiseFilter.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
         
-        gain.gain.setValueAtTime(1, time);
+        gain.gain.setValueAtTime(0.3, time); // Hi-hats should be quieter
         gain.gain.exponentialRampToValueAtTime(0.01, time + settings.decay);
         
         noise.start(time);
+        noise.stop(time + settings.decay);
     }
 }
 
@@ -106,10 +115,9 @@ function handlePadPlay(pad) {
     setTimeout(() => pad.classList.remove('playing'), 100);
 }
 
-// Keydown listener
 const handleKeyDown = (e) => {
     const key = e.key.toLowerCase();
-    const pad = document.querySelector(\`.drum-pad[data-key="\${key}"]\`);
+    const pad = document.querySelector(`.drum-pad[data-key="${key}"]`);
     if (pad && !pad.classList.contains('playing')) {
         handlePadPlay(pad);
     }
@@ -120,7 +128,6 @@ export function initSimulator() {
     
     pads.forEach(pad => {
         pad.addEventListener('mousedown', () => handlePadPlay(pad));
-        // touch support for mobile/tablets
         pad.addEventListener('touchstart', (e) => {
             e.preventDefault();
             handlePadPlay(pad);
@@ -129,50 +136,64 @@ export function initSimulator() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    // Setup recorder
     const recordBtn = document.getElementById('record-btn');
     const playBtn = document.getElementById('play-btn');
     const statusText = document.getElementById('record-status');
 
     if(recordBtn) {
         recordBtn.addEventListener('click', () => {
+            if(isPlaying) return; // Prevent recording while playing
+
             if(!isRecording) {
                 isRecording = true;
                 recordedNotes = [];
                 startTime = Date.now();
-                recordBtn.innerText = '🛑 Stop Recording';
+                recordBtn.innerHTML = '<i data-feather="square" class="text-red"></i> Stop Recording';
+                recordBtn.classList.add('recording-active');
                 statusText.innerText = 'Recording...';
-                statusText.style.color = '#ff0055';
+                statusText.style.color = '#ff3b30';
                 playBtn.disabled = true;
+                if (window.feather) window.feather.replace();
             } else {
                 isRecording = false;
-                recordBtn.innerText = '🟢 Record MIDI (Demo)';
-                statusText.innerText = \`Ready (\${recordedNotes.length} notes)\`;
-                statusText.style.color = '#aaa';
+                recordBtn.innerHTML = '<i data-feather="circle" class="text-red"></i> Record MIDI (Demo)';
+                recordBtn.classList.remove('recording-active');
+                statusText.innerText = `Ready (${recordedNotes.length} notes)`;
+                statusText.style.color = 'var(--text-secondary)';
                 if(recordedNotes.length > 0) playBtn.disabled = false;
+                if (window.feather) window.feather.replace();
             }
         });
     }
 
     if(playBtn) {
         playBtn.addEventListener('click', () => {
-            if(recordedNotes.length === 0) return;
+            if(recordedNotes.length === 0 || isPlaying || isRecording) return;
+            
+            isPlaying = true;
+            playBtn.disabled = true;
+            recordBtn.disabled = true;
             statusText.innerText = 'Playing...';
-            statusText.style.color = 'var(--primary-neon)';
+            statusText.style.color = 'var(--accent)';
+            
+            const playbackStartTime = Date.now();
             
             recordedNotes.forEach(note => {
                 setTimeout(() => {
-                    const pad = document.querySelector(\`.drum-pad[data-sound="\${note.sound}"]\`);
+                    const pad = document.querySelector(`.drum-pad[data-sound="${note.sound}"]`);
                     if(pad) handlePadPlay(pad);
                 }, note.time);
             });
 
-            // Reset text when done
-            const lastNote = recordedNotes[recordedNotes.length - 1];
+            const lastNoteTime = recordedNotes.length > 0 ? recordedNotes[recordedNotes.length - 1].time : 0;
+            
             setTimeout(() => {
-                statusText.innerText = \`Ready (\${recordedNotes.length} notes)\`;
-                statusText.style.color = '#aaa';
-            }, lastNote.time + 500);
+                isPlaying = false;
+                playBtn.disabled = false;
+                recordBtn.disabled = false;
+                statusText.innerText = `Ready (${recordedNotes.length} notes)`;
+                statusText.style.color = 'var(--text-secondary)';
+            }, lastNoteTime + 500);
         });
     }
 }

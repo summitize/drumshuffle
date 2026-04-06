@@ -1,5 +1,10 @@
+import { initSimulator } from './simulator.js';
+
 // Wait for DOM
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Simulator
+    initSimulator();
+
     // Initialize Feather Icons
     feather.replace();
 

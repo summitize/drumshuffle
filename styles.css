@@ -119,6 +119,7 @@ body {
     letter-spacing: -0.5px;
     background: linear-gradient(90deg, var(--text-primary), var(--accent));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 .nav-links {
@@ -188,6 +189,7 @@ main {
     letter-spacing: -1px;
     background: linear-gradient(135deg, var(--text-primary), var(--accent));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 .section-title {
@@ -352,6 +354,101 @@ main {
     border-top: 1px solid var(--glass-border);
     background: var(--glass-bg);
     backdrop-filter: blur(25px);
+}
+/* Drum Simulator Section */
+.simulator-section {
+    margin-bottom: 60px;
+}
+.simulator-container {
+    text-align: center;
+}
+.simulator-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.simulator-hint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    opacity: 0.7;
+}
+.record-status {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    min-width: 120px;
+}
+.text-red {
+    color: #ff3b30;
+}
+.drum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.drum-pad-wrapper {
+    perspective: 1000px;
+}
+.drum-pad {
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    position: relative;
+    box-shadow: 0 8px 20px var(--glass-shadow);
+}
+.drum-pad:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.drum-pad:active, .drum-pad.playing {
+    transform: scale(0.92) translateY(2px);
+    background: var(--accent);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(10, 132, 255, 0.6);
+}
+.drum-pad.playing .pad-label, .drum-pad.playing .key-hint {
+    color: #fff;
+}
+.pad-label {
+    font-weight: 800;
+    font-size: 1rem;
+    pointer-events: none;
+}
+.key-hint {
+    font-size: 0.75rem;
+    margin-top: 4px;
+    opacity: 0.6;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: var(--glass-border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes pulse-red {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+.recording-active i {
+    animation: pulse-red 1s infinite;
+    color: #ff3b30 !important;
 }
 
 @media (max-width: 768px) {
