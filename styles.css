@@ -177,43 +177,54 @@ body {
 .discord-badge {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: rgba(88, 101, 242, 0.1);
     border: 1px solid rgba(88, 101, 242, 0.2);
-    padding: 6px 12px;
-    border-radius: 20px;
+    padding: 12px 24px;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    color: #5865F2;
+    font-weight: 600;
 }
 .discord-badge i {
-    color: #5865F2;
+    width: 20px;
+    height: 20px;
     transition: transform 0.3s ease;
 }
+.discord-tooltip {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-right: -4px;
+    display: none;
+}
 .discord-username {
-    font-weight: 600;
-    font-size: 0.85rem;
-    max-width: 0;
-    opacity: 0;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    color: #5865F2;
+    font-size: 1rem;
 }
 .discord-badge:hover {
     background: #5865F2;
     border-color: #5865F2;
-    box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.6);
+    transform: scale(1.02);
+    color: #fff;
 }
 .discord-badge:hover i {
-    color: #fff;
-    transform: rotate(15deg);
+    transform: rotate(12deg) scale(1.1);
 }
-.discord-badge:hover .discord-username {
-    max-width: 100px;
-    opacity: 1;
-    margin-left: 4px;
-    color: #fff;
+.discord-badge:hover .discord-tooltip {
+    display: inline;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-5px); }
+    to { opacity: 0.8; transform: translateX(0); }
+}
+
+.hero-discord {
+    margin-top: 5px;
 }
 
 .btn-bandlab {
