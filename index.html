@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drumshuffle | Your Ultimate Drumming Hub</title>
+    <meta name="description" content="A space for 14-year-old drumming enthusiasts. Find drumless tracks, MIDI records, an online drum simulator, and top recommendations for gear.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <!-- Feather Icons for lightweight UI icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <i data-feather="monitor"></i>
+                <h2>Drumshuffle</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-view="dashboard"><i data-feather="home"></i> Dashboard</li>
+                <li data-view="simulator"><i data-feather="play-circle"></i> Simulator</li>
+                <li data-view="splitter"><i data-feather="layers"></i> Stem Splitter</li>
+                <li data-view="resources"><i data-feather="briefcase"></i> Resources</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Views injected by app.js -->
+        </main>
+    </div>
+
+    <!-- Modular JS Scripts -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
