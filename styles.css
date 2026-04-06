@@ -173,6 +173,66 @@ body {
     66% { transform: rotate(8deg) translate(-1px, 1px); }
     100% { transform: rotate(10deg) translate(0, 0); }
 }
+/* Social & Brand Extensions */
+.discord-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(88, 101, 242, 0.1);
+    border: 1px solid rgba(88, 101, 242, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.discord-badge i {
+    color: #5865F2;
+    transition: transform 0.3s ease;
+}
+.discord-username {
+    font-weight: 600;
+    font-size: 0.85rem;
+    max-width: 0;
+    opacity: 0;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    color: #5865F2;
+}
+.discord-badge:hover {
+    background: #5865F2;
+    border-color: #5865F2;
+    box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
+}
+.discord-badge:hover i {
+    color: #fff;
+    transform: rotate(15deg);
+}
+.discord-badge:hover .discord-username {
+    max-width: 100px;
+    opacity: 1;
+    margin-left: 4px;
+    color: #fff;
+}
+
+.btn-bandlab {
+    background: #19dec1;
+    color: #000;
+    box-shadow: 0 4px 15px rgba(25, 222, 193, 0.3);
+}
+.btn-bandlab:hover {
+    background: #14c5aa;
+    transform: scale(1.02);
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -434,62 +494,87 @@ main {
     color: var(--text-secondary);
     min-width: 120px;
 }
-.text-red {
-    color: #ff3b30;
+.drum-kit-visual {
+    position: relative;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.drum-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+.drum-kit-bg {
+    width: 100%;
+    display: block;
+    opacity: 0.8;
 }
+
+/* Absolute Positioned Pads */
 .drum-pad-wrapper {
-    perspective: 1000px;
+    position: absolute;
+    width: 12%; 
+    aspect-ratio: 1/1;
+    z-index: 10;
 }
 .drum-pad {
-    background: var(--glass-bg);
-    border: 2px solid var(--glass-border);
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    user-select: none;
-    position: relative;
-    box-shadow: 0 8px 20px var(--glass-shadow);
+    transition: all 0.1s ease;
 }
+
+/* Position mappings based on the generated top-down view kit */
+.crash-pos { top: 15%; left: 15%; width: 18%; }
+.ride-pos { top: 15%; right: 15%; width: 22%; }
+.hihat-pos { top: 40%; left: 10%; width: 14%; }
+.openhihat-pos { top: 35%; left: 15%; width: 10%; opacity: 0.7; }
+.tom1-pos { top: 25%; left: 35%; width: 14%; }
+.tom2-pos { top: 25%; right: 35%; width: 14%; }
+.snare-pos { top: 60%; left: 25%; width: 18%; }
+.kick-pos { top: 75%; left: 45%; width: 10%; }
+.cowbell-pos { top: 35%; right: 30%; width: 8%; }
+
 .drum-pad:hover {
+    background: rgba(255, 255, 255, 0.15);
     border-color: var(--accent);
-    transform: translateY(-2px);
 }
 .drum-pad:active, .drum-pad.playing {
-    transform: scale(0.92) translateY(2px);
     background: var(--accent);
+    box-shadow: 0 0 30px var(--accent);
+    transform: scale(0.95);
     border-color: #fff;
-    box-shadow: 0 0 20px rgba(10, 132, 255, 0.6);
 }
-.drum-pad.playing .pad-label, .drum-pad.playing .key-hint {
+.drum-pad.playing .key-hint {
     color: #fff;
 }
-.pad-label {
+
+.key-hint {
+    font-size: 0.7rem;
     font-weight: 800;
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
     pointer-events: none;
 }
-.key-hint {
-    font-size: 0.75rem;
-    margin-top: 4px;
-    opacity: 0.6;
-    font-weight: 600;
-    text-transform: uppercase;
-    background: var(--glass-border);
-    padding: 2px 6px;
-    border-radius: 4px;
-    pointer-events: none;
+
+@media (max-width: 768px) {
+    /* Stack pads in a grid for mobile as image overlay is hard to tap */
+    .drum-kit-visual {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        background: transparent;
+        box-shadow: none;
+    }
+    .drum-kit-bg { display: none; }
+    .drum-pad-wrapper {
+        position: static;
+        width: 100%;
+    }
 }
 
 /* Animations */

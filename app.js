@@ -76,4 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         });
     }
+
+    // Discord Badge Logic
+    const discordBadge = document.querySelector('.discord-badge');
+    if (discordBadge) {
+        discordBadge.addEventListener('click', () => {
+            const username = 'vedbub';
+            navigator.clipboard.writeText(username).then(() => {
+                const originalContent = discordBadge.innerHTML;
+                discordBadge.innerHTML = '<i data-feather="check"></i><span class="discord-username" style="max-width: 100px; opacity: 1;">Copied!</span>';
+                feather.replace();
+                
+                setTimeout(() => {
+                    discordBadge.innerHTML = originalContent;
+                    feather.replace();
+                }, 2000);
+            });
+        });
+    }
 });

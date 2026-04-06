@@ -10,9 +10,12 @@ const drumKit = {
     'kick': { type: 'kick', freq: 150, decay: 0.5 },
     'snare': { type: 'snare', freq: 250, decay: 0.2 },
     'hihat': { type: 'hihat', freq: 1000, decay: 0.1 },
+    'openhihat': { type: 'hihat', freq: 1000, decay: 0.6 },
     'tom1': { type: 'kick', freq: 300, decay: 0.4 },
     'tom2': { type: 'kick', freq: 200, decay: 0.5 },
-    'crash': { type: 'hihat', freq: 800, decay: 1.5 }
+    'ride': { type: 'ride', freq: 400, decay: 1.5 },
+    'crash': { type: 'hihat', freq: 800, decay: 1.5 },
+    'cowbell': { type: 'cowbell', freq: 800, decay: 0.3 }
 };
 
 function initAudio() {
@@ -100,11 +103,56 @@ function playSound(soundName) {
         noiseFilter.connect(gain);
         gain.connect(ctx.destination);
         
-        gain.gain.setValueAtTime(0.3, time); // Hi-hats should be quieter
+        gain.gain.setValueAtTime(0.3, time);
         gain.gain.exponentialRampToValueAtTime(0.01, time + settings.decay);
         
         noise.start(time);
         noise.stop(time + settings.decay);
+    }
+    else if (settings.type === 'ride') {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.frequency.setValueAtTime(settings.freq, time);
+        osc.frequency.exponentialRampToValueAtTime(settings.freq * 2, time + settings.decay); 
+        
+        gain.gain.setValueAtTime(0.4, time);
+        gain.gain.exponentialRampToValueAtTime(0.01, time + settings.decay);
+        
+        osc.start(time);
+        osc.stop(time + settings.decay);
+    }
+    else if (settings.type === 'cowbell') {
+        // Cowbell is usually two oscillators with a harmonic ratio
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc1.type = 'square';
+        osc2.type = 'square';
+        
+        osc1.frequency.value = 540;
+        osc2.frequency.value = 800;
+        
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 800;
+        
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        
+        gain.gain.setValueAtTime(0.5, time);
+        gain.gain.exponentialRampToValueAtTime(0.01, time + settings.decay);
+        
+        osc1.start(time);
+        osc2.start(time);
+        osc1.stop(time + settings.decay);
+        osc2.stop(time + settings.decay);
     }
 }
 
@@ -142,7 +190,7 @@ export function initSimulator() {
 
     if(recordBtn) {
         recordBtn.addEventListener('click', () => {
-            if(isPlaying) return; // Prevent recording while playing
+            if(isPlaying) return;
 
             if(!isRecording) {
                 isRecording = true;

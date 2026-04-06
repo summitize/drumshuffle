@@ -40,6 +40,10 @@
                     <i data-feather="moon" id="theme-icon"></i>
                 </button>
             </div>
+            <div class="discord-badge" title="Click to copy username">
+                <i data-feather="message-circle"></i>
+                <span class="discord-username">vedbub</span>
+            </div>
         </div>
     </nav>
 
@@ -66,23 +70,27 @@
                         target="_blank">
                         <i data-feather="youtube"></i> Subscribe
                     </a>
+                    <a href="https://bandlab.com/drumshuffleofficial" class="btn btn-bandlab" target="_blank">
+                        <i data-feather="music"></i> BandLab Profile
+                    </a>
                 </div>
                 <div class="upi-text">
                     <small>Support securely via UPI at: <strong>9822025420@fam</strong></small>
                 </div>
             </div>
 
-            <!-- Image Provided in Prompt -->
+            <!-- Video Backdrop (Ved.png is actually MP4) -->
             <div class="hero-image liquid-card p-0">
-                <!-- Landing area image -->
-                <img src="assets/Ved.png" alt="Drumshuffle Landing Photo"
-                    onerror="this.src='https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=800'; this.alt='Drum Set Placeholder'">
+                <video autoplay loop muted playsinline class="hero-video" poster="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=800">
+                    <source src="assets/Ved.png" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </section>
 
-        <!-- Drum Simulator Section -->
+        <!-- E-Drum Simulator Section -->
         <section id="simulator" class="simulator-section">
-            <h2 class="section-title">Alesis Nitro Max Simulator</h2>
+            <h2 class="section-title">E-Drum Simulator</h2>
             <div class="liquid-card simulator-container">
                 <div class="simulator-controls">
                     <button id="record-btn" class="btn btn-glass">
@@ -93,42 +101,55 @@
                     </button>
                     <span id="record-status" class="record-status">Ready</span>
                 </div>
-                <p class="simulator-hint">Uses Web Audio Synthesis. Best on Desktop with Keyboard.</p>
-                <div class="drum-grid">
-                    <div class="drum-pad-wrapper">
+                <p class="simulator-hint">Uses Web Audio Synthesis. Keyboard: Q, W, E, R, T, Y, U, A, S, D, F</p>
+                
+                <div class="drum-kit-visual">
+                    <img src="assets/DrumKit.png" alt="E-Drum Kit" class="drum-kit-bg">
+                    
+                    <!-- Interactive Pads Overlaid on Image -->
+                    <div class="drum-pad-wrapper crash-pos">
                         <div class="drum-pad" data-sound="crash" data-key="q">
-                            <span class="pad-label">Crash</span>
                             <span class="key-hint">Q</span>
                         </div>
                     </div>
-                    <div class="drum-pad-wrapper">
+                    <div class="drum-pad-wrapper ride-pos">
+                        <div class="drum-pad" data-sound="ride" data-key="t">
+                            <span class="key-hint">T</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper hihat-pos">
                         <div class="drum-pad" data-sound="hihat" data-key="w">
-                            <span class="pad-label">Hi-Hat</span>
                             <span class="key-hint">W</span>
                         </div>
                     </div>
-                    <div class="drum-pad-wrapper">
+                    <div class="drum-pad-wrapper openhihat-pos">
+                        <div class="drum-pad" data-sound="openhihat" data-key="y">
+                            <span class="key-hint">Y</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper tom1-pos">
                         <div class="drum-pad" data-sound="tom1" data-key="e">
-                            <span class="pad-label">Tom 1</span>
                             <span class="key-hint">E</span>
                         </div>
                     </div>
-                    <div class="drum-pad-wrapper">
+                    <div class="drum-pad-wrapper tom2-pos">
                         <div class="drum-pad" data-sound="tom2" data-key="r">
-                            <span class="pad-label">Tom 2</span>
                             <span class="key-hint">R</span>
                         </div>
                     </div>
-                    <div class="drum-pad-wrapper">
+                    <div class="drum-pad-wrapper snare-pos">
                         <div class="drum-pad" data-sound="snare" data-key="a">
-                            <span class="pad-label">Snare</span>
                             <span class="key-hint">A</span>
                         </div>
                     </div>
-                    <div class="drum-pad-wrapper">
+                    <div class="drum-pad-wrapper kick-pos">
                         <div class="drum-pad" data-sound="kick" data-key="s">
-                            <span class="pad-label">Kick</span>
                             <span class="key-hint">S</span>
+                        </div>
+                    </div>
+                    <div class="drum-pad-wrapper cowbell-pos">
+                        <div class="drum-pad" data-sound="cowbell" data-key="u">
+                            <span class="key-hint">U</span>
                         </div>
                     </div>
                 </div>
