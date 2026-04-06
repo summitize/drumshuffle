@@ -1,38 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drumshuffle | Your Ultimate Drumming Hub</title>
-    <meta name="description" content="A space for 14-year-old drumming enthusiasts. Find drumless tracks, MIDI records, an online drum simulator, and top recommendations for gear.">
+    <title>Drumshuffle | Professional Drumming & Music</title>
+    <meta name="description" content="The official website for Drumshuffle - a 15-year-old budding drummer's hub for covers, practice tools, and music resources.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
-    <!-- Feather Icons for lightweight UI icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <div id="app">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+    <!-- Background Decorators -->
+    <div class="blob shape-1"></div>
+    <div class="blob shape-2"></div>
+    <div class="blob shape-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
             <div class="brand">
-                <i data-feather="monitor"></i>
+                <div class="channel-icon">
+                    <!-- Generic placeholder representing the drumshuffle logo. 
+                         You can swap the src with your actual youtube logo url -->
+                    <img src="https://ui-avatars.com/api/?name=DS&background=EA4335&color=fff&rounded=true&bold=true" alt="Drumshuffle Icon">
+                </div>
                 <h2>Drumshuffle</h2>
             </div>
-            <ul class="nav-links">
-                <li class="active" data-view="dashboard"><i data-feather="home"></i> Dashboard</li>
-                <li data-view="simulator"><i data-feather="play-circle"></i> Simulator</li>
-                <li data-view="splitter"><i data-feather="layers"></i> Stem Splitter</li>
-                <li data-view="resources"><i data-feather="briefcase"></i> Resources</li>
-            </ul>
-        </nav>
+            <div class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#videos">Videos</a>
+                <a href="#feedback">Feedback</a>
+                <button id="theme-toggle" aria-label="Toggle Theme">
+                    <i data-feather="moon" id="theme-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Main Content Area -->
-        <main id="main-content">
-            <!-- Views injected by app.js -->
-        </main>
-    </div>
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content liquid-card">
+                <h1 class="gradient-text">Keep the Rhythm Alive.</h1>
+                <p>Welcome to <strong>Drumshuffle</strong>! I'm a 15-year-old drummer sharing my journey, covers, and insights into the world of percussion and music architecture.</p>
+                
+                <div class="action-buttons">
+                    <a href="upi://pay?pa=9822025420@fam&pn=Drumshuffle&cu=INR" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        <i data-feather="coffee"></i> Buy me a coffee
+                    </a>
+                    <a href="https://www.youtube.com/results?search_query=drumshuffle" class="btn btn-glass" target="_blank">
+                        <i data-feather="youtube"></i> Subscribe
+                    </a>
+                </div>
+                <div class="upi-text">
+                    <small>Support securely via UPI at: <strong>9822025420@fam</strong></small>
+                </div>
+            </div>
+
+            <!-- Image Provided in Prompt -->
+            <div class="hero-image liquid-card p-0">
+                <!-- Replace 'assets/hero-image.png' with the actual path to the diagram you uploaded -->
+                <img src="./assets/hero-image.png" alt="Drumshuffle Azure Architecture Diagram" onerror="this.src='https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=800'; this.alt='Drum Set Placeholder'">
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" class="videos-section">
+            <h2 class="section-title">Latest & Greatest</h2>
+            <div class="grid-2">
+                <!-- Placeholder YouTube Videos -->
+                <div class="liquid-card video-card">
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Drum Cover 1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Top Drum Cover</h3>
+                    <p>Playing an intricate shuffle through a classic rock song.</p>
+                </div>
+                <div class="liquid-card video-card">
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/tPEE9ZwTmy0" title="Drum Cover 2" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Technical Practice Routine</h3>
+                    <p>My daily warmup routine showcasing snare technique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="feedback-section">
+            <div class="liquid-card form-card">
+                <h2 class="section-title">Get In Touch</h2>
+                <p>Have a song request, feedback on my covers, or just want to talk music?</p>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="John Bonham" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="4" placeholder="Can you cover..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Feedback</button>
+                    <div id="form-success" class="success-msg hidden">Thanks! Your message has been sent.</div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="glass-footer">
+        <p>&copy; 2026 Drumshuffle. Designed with precision and rhythm.</p>
+    </footer>
 
     <!-- Modular JS Scripts -->
     <script type="module" src="app.js"></script>
