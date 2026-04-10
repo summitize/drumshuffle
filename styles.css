@@ -432,7 +432,7 @@ main {
 .video-card h3 {
     font-size: 1.25rem;
     margin-bottom: 8px;
-}
+}`n`n/* Store Section */`n.store-section {`n    margin-bottom: 60px;`n}`n.store-card {`n    text-align: center;`n    padding: 40px 30px;`n    border: 2px solid rgba(255, 149, 0, 0.3);`n}`n.store-card:hover {`n    border-color: rgba(255, 149, 0, 0.6);`n}`n
 
 /* Feedback Form */
 .form-card {
@@ -622,3 +622,4 @@ main {
         grid-template-columns: 1fr;
     }
 }
+
