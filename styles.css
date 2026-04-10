@@ -1,4 +1,4 @@
-:root[data-theme="light"] {
+﻿:root[data-theme="light"] {
     --bg-base: #f0f2f5;
     --bg-blob-1: rgba(0, 122, 255, 0.4);
     --bg-blob-2: rgba(52, 199, 89, 0.4);
@@ -647,4 +647,25 @@ main {
 }
 .text-center {
     text-align: center;
+}
+
+
+/* Store Refinements */
+.store-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.1) 100%);
+}
+.store-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(10, 132, 255, 0.2);
+    border-color: rgba(10, 132, 255, 0.5);
+}
+.kit-dropdown {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.kit-dropdown:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
 }
