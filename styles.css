@@ -534,6 +534,8 @@ main {
 }
 .drum-kit-bg {
     width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
     display: block;
     opacity: 0.8;
 }
@@ -599,11 +601,12 @@ main {
         background: transparent;
         box-shadow: none;
     }
-    .drum-kit-bg { display: none; }
-    .drum-pad-wrapper {
-        position: static;
-        width: 100%;
-    }
+    .drum-kit-bg {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    opacity: 0.8;
 }
 
 /* Animations */
@@ -669,3 +672,4 @@ main {
     border-color: var(--accent);
     box-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
 }
+

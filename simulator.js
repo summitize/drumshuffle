@@ -27,7 +27,7 @@ const kitManifest = {
     },
     'electro': {
         base: 'samples/musicradar-drum-samples/musicradar-drum-samples/Drum Kits/Kit 4 - Electro/',
-        bg: 'assets/images/sim_bg_electro.png',
+        bg: 'assets/images/pack_img_kurzweil.png',
         files: {
             'kick': 'CYCdh_ElecK01-Kick01.wav',
             'snare': 'CYCdh_ElecK01-Snr01.wav',
@@ -42,7 +42,7 @@ const kitManifest = {
     },
     'electro2': {
         base: 'samples/musicradar-drum-samples/musicradar-drum-samples/Drum Kits/Kit 15 - Electro/',
-        bg: 'assets/images/sim_bg_electro.png', // reusing neon cyberpunk
+        bg: 'assets/images/pack_img_electro.png',
         files: {
             'kick': 'CYCdh_ElecK05-Kick01.wav',
             'snare': 'CYCdh_ElecK05-Snr01.wav',
@@ -57,7 +57,7 @@ const kitManifest = {
     },
     'vinyl': {
         base: 'samples/musicradar-drum-samples/musicradar-drum-samples/Drum Kits/Kit 8 - Vinyl/',
-        bg: 'assets/images/sim_bg_acoustic.png', // reusing acoustic retro
+        bg: 'assets/images/pack_img_vinyl.png',
         files: {
             'kick': 'CYCdh_VinylK1-Kick01.wav',
             'snare': 'CYCdh_VinylK1-Snr01.wav',
@@ -72,7 +72,7 @@ const kitManifest = {
     },
     'kurzweil': {
         base: 'samples/musicradar-drum-samples/musicradar-drum-samples/Drum Kits/Kurzweil Kit 01/',
-        bg: 'assets/images/sim_bg_electro.png',
+        bg: 'assets/images/pack_img_kurzweil.png',
         files: {
             'kick': 'CYCdh_Kurz01-Kick01.wav',
             'snare': 'CYCdh_Kurz01-Snr01.wav',
@@ -120,6 +120,9 @@ async function loadKit(kitName) {
             buffers[padName] = decodedBuf;
         } catch(e) {
             console.error('Failed processing ' + filename, e);
+            if (window.location.protocol === 'file:' && padName === 'kick') {
+                alert("Drum Simulator Error: Your browser restricts loading local audio files directly from file:/// paths. Please use a Local Server extension or view this live on GitHub to hear the drums play!");
+            }
         }
     }
 }
@@ -249,3 +252,4 @@ export function stopSimulator() {
         audioCtx.suspend();
     }
 }
+
