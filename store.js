@@ -12,6 +12,36 @@
 let selectedFile = "";
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Sample Packs Rendering
+    const packsData = [
+        { title: 'Acoustic Close Kit', filename: 'Kit_1___Acoustic_close.zip', img: 'assets/images/pack_img_acoustic.png' },
+        { title: 'Electro Synth Kit', filename: 'Kit_4___Electro.zip', img: 'assets/images/pack_img_electro.png' },
+        { title: 'Vintage Vinyl Set', filename: 'Kit_8___Vinyl.zip', img: 'assets/images/pack_img_vinyl.png' },
+        { title: 'Electro Kit 2', filename: 'Kit_15___Electro.zip', img: 'assets/images/pack_img_electro.png' },
+        { title: 'Kurzweil Drum Machine', filename: 'Kurzweil_Kit_01.zip', img: 'assets/images/pack_img_kurzweil.png' }
+    ];
+    
+    const packsContainer = document.getElementById('packs-container');
+    if (packsContainer) {
+        packsData.forEach(pack => {
+            const card = document.createElement('div');
+            card.className = "liquid-card store-card";
+            card.style.padding = "0";
+            card.style.overflow = "hidden";
+            card.innerHTML = \
+                <img src="\" alt="\" style="width: 100%; height: 250px; object-fit: cover;">
+                <div style="padding: 20px; text-align: left;">
+                    <h3 style="margin-bottom: 5px;">\</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9em;">Includes WAV files for 9 raw hit mappings.</p>
+                    <a href="assets/packs/\" download class="btn btn-primary w-100" style="text-align: center;">
+                        <i data-feather="download"></i> Download Pack (.zip)
+                    </a>
+                </div>
+            \;
+            packsContainer.appendChild(card);
+        });
+    }
+
     feather.replace();
     
     fetch('notes.json').then(r=>r.json()).then(data => {
@@ -111,3 +141,30 @@ otes/DRUMNOTES/\\, '_blank');
         rzp.open();
     });
 });
+
+
+    const allPacksFiles = ['Kit_10_-_Vinyl.zip', 'Kit_11_-_Vinyl.zip', 'Kit_12_-_Vinyl.zip', 'Kit_13_-_Acoustic.zip', 'Kit_14_-_Acoustic.zip', 'Kit_15_-_Electro.zip', 'Kit_15___Electro.zip', 'Kit_16_-_Electro.zip', 'Kit_17_-_Electro.zip', 'Kit_18_-_Acoustic.zip', 'Kit_1_-_Acoustic_close.zip', 'Kit_1___Acoustic_close.zip', 'Kit_2_-_Acoustic_room.zip', 'Kit_3_-_Acoustic.zip', 'Kit_4_-_Electro.zip', 'Kit_4___Electro.zip', 'Kit_5_-_Electro.zip', 'Kit_6_-_Electro.zip', 'Kit_7_-_Electro.zip', 'Kit_8_-_Vinyl.zip', 'Kit_8___Vinyl.zip', 'Kit_9_-_Vinyl.zip', 'Kurzweil_Kit_01.zip', 'Kurzweil_Kit_02.zip', 'Kurzweil_Kit_03.zip', 'Kurzweil_Kit_04.zip', 'Kurzweil_Kit_05.zip', 'Kurzweil_Kit_06.zip', 'Kurzweil_Kit_07.zip', 'Kurzweil_Kit_08.zip'];
+    
+    const masterDropdown = document.getElementById('master-pack-dropdown');
+    const masterBtn = document.getElementById('master-download-btn');
+    
+    if (masterDropdown) {
+        allPacksFiles.forEach(file => {
+            let neatName = file.replace('.zip', '').replace(/_/g, ' ');
+            let opt = document.createElement('option');
+            opt.value = file;
+            opt.innerText = neatName;
+            opt.style.color = "black";
+            masterDropdown.appendChild(opt);
+        });
+        
+        masterDropdown.addEventListener('change', (e) => {
+            if(e.target.value) {
+                masterBtn.disabled = false;
+            }
+        });
+        
+        masterBtn.addEventListener('click', () => {
+             window.open('assets/packs/' + masterDropdown.value, '_blank');
+        });
+    }

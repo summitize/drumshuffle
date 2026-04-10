@@ -1,9 +1,11 @@
+﻿import { initMetronome } from './metronome.js';
 import { initSimulator } from './simulator.js';
 
 // Wait for DOM
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Simulator
     initSimulator();
+    initMetronome();
 
     // Initialize Feather Icons
     feather.replace();
@@ -95,5 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 
 
