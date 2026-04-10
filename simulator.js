@@ -1,4 +1,4 @@
-// Web Audio API Synthesizer for Drum Sounds
+﻿// Web Audio API Synthesizer for Drum Sounds
 let audioCtx;
 let recordedNotes = [];
 let isRecording = false;
@@ -252,3 +252,4 @@ export function stopSimulator() {
         audioCtx.suspend();
     }
 }
+
