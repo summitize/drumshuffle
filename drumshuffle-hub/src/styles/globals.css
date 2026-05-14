@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -71,38 +71,72 @@ body {
 
 /* ─── Utility Layer ──────────────────────────────────────── */
 @layer components {
-  /* Glass card */
+  /* Liquid Glass card */
   .glass-card {
-    background: var(--bg-glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-card);
-    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 
+      0 12px 40px 0 rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Liquid Glass Overlay Specular Highlight */
+  .glass-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
   }
 
-  /* Brand button */
+  /* Liquid Glass Brand button */
   .btn-brand {
-    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
-    background: linear-gradient(135deg, #ff3d2e, #c7180a);
-    box-shadow: 0 4px 20px rgba(255, 61, 46, 0.35);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-semibold text-white transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(135deg, rgba(255, 61, 46, 0.3), rgba(255, 61, 46, 0.1));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 61, 46, 0.5);
+    border-bottom: 1px solid rgba(255, 61, 46, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(255, 61, 46, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
   }
   .btn-brand:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(255, 61, 46, 0.5);
+    background: linear-gradient(135deg, rgba(255, 61, 46, 0.4), rgba(255, 61, 46, 0.15));
+    box-shadow: 
+      0 12px 40px rgba(255, 61, 46, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
   }
   .btn-brand:active { transform: translateY(0); }
 
-  /* Ghost button */
+  /* Liquid Glass Ghost button */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 relative overflow-hidden;
     color: var(--text-primary);
-    border: 1px solid var(--border-card);
-    background: var(--bg-glass);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
   }
   .btn-ghost:hover {
-    border-color: rgba(255, 61, 46, 0.4);
-    background: rgba(255, 61, 46, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
   }
 
   /* Section heading */

@@ -39,13 +39,23 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-night-950/70 backdrop-blur-2xl border-b border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-          : "bg-transparent py-2"
+        scrolled ? "py-3 lg:py-4" : "py-5 lg:py-6"
       )}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20 transition-all duration-500">
+      <nav
+        className={cn(
+          "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-out",
+          scrolled
+            ? "glass-card bg-gradient-to-br from-white/[0.08] to-white/[0.02] !border-white/[0.15] px-4 py-3 sm:px-6"
+            : "bg-transparent border border-transparent px-2"
+        )}
+      >
+        {scrolled && (
+          <div className="absolute inset-0 rounded-[2rem] pointer-events-none overflow-hidden">
+            <div className="absolute top-0 left-1/4 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          </div>
+        )}
+        <div className="flex items-center justify-between h-12 md:h-14 transition-all duration-500">
           {/* Logo Placeholder */}
           <Link href="/" className="flex items-center gap-3 group z-50" id="nav-logo">
             <motion.div
