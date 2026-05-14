@@ -1,16 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { PlayCircle, Youtube } from "lucide-react";
 
-// Placeholder data for YouTube integration
-const MOCK_VIDEOS = [
-  { id: "vid_1", title: "5 Essential Ghost Note Patterns", duration: "8:24", views: "14k", thumbnail: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=800&auto=format&fit=crop" },
-  { id: "vid_2", title: "How to Tune Your Snare Drum Like a Pro", duration: "12:10", views: "32k", thumbnail: "https://images.unsplash.com/photo-1595069906974-f8fa7dc918d2?q=80&w=800&auto=format&fit=crop" },
-  { id: "vid_3", title: "Mastering the Moeller Technique in 10 Mins", duration: "10:05", views: "8k", thumbnail: "https://images.unsplash.com/photo-1524230659092-07f99a75c013?q=80&w=800&auto=format&fit=crop" },
-  { id: "vid_4", title: "Drum Fills That Will Blow Minds", duration: "15:30", views: "45k", thumbnail: "https://images.unsplash.com/photo-1543443374-16281dc3d706?q=80&w=800&auto=format&fit=crop" },
-];
+// Videos section for playlists
 
 const playTing = () => {
   try {
