@@ -17,9 +17,9 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
   const controls = useAnimation();
   const padRef = useRef<HTMLButtonElement>(null);
 
-  const hitPad = useCallback((velocity: number = 1) => {
+  const hitPad = (velocity: number = 1) => {
     if (!isReady) return;
-    
+
     // Trigger sound
     onPlay(id, velocity);
 
@@ -41,7 +41,7 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
         transition: { duration: 0.2 }
       });
     }
-  }, [id, isReady, onPlay, type, controls, color]);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,7 +56,7 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [keybind, hitPad]);
+  }, [keybind, isReady, onPlay, id]);
 
   return (
     <motion.button
@@ -70,7 +70,7 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
       }}
       className={cn(
         "relative flex flex-col items-center justify-center p-4 rounded-full aspect-square touch-none select-none transition-colors",
-        type === "cymbal" 
+        type === "cymbal"
           ? "bg-gradient-to-br from-amber-200/20 to-amber-600/20 border-2 border-amber-500/30 shadow-[inset_0_0_20px_rgba(251,191,36,0.1)] hover:border-amber-500/50"
           : "bg-night-900 border border-white/10 shadow-[inset_0_-10px_20px_rgba(0,0,0,0.5)] hover:bg-night-800"
       )}

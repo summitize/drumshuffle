@@ -107,7 +107,7 @@ export function useMetronome() {
 
     Tone.Transport.start();
     setState(s => ({ ...s, isPlaying: true }));
-  };
+  }, [state.bpm, state.beatsPerMeasure, state.subdivision, state.soundType, state.accentFirstBeat]);
 
   const stopPlayback = useCallback(() => {
     Tone.Transport.stop();
@@ -116,7 +116,7 @@ export function useMetronome() {
     }
     setState(s => ({ ...s, isPlaying: false }));
     setCurrentBeat(0);
-    setCurrentSub(0);
+    setCurrentSubdivision(0);
   }, []);
 
   const togglePlay = useCallback(async () => {
@@ -140,7 +140,7 @@ export function useMetronome() {
     state,
     setState,
     currentBeat,
-    currentSub,
+    currentSubdivision,
     togglePlay,
     stopPlayback
   };
