@@ -14,7 +14,7 @@ const MOCK_VIDEOS = [
 
 const playTing = () => {
   try {
-    // @ts-ignore
+    // @ts-expect-error - webkitAudioContext is not in standard types but needed for Safari
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     const ctx = new AudioContextClass();
     const osc = ctx.createOscillator();
