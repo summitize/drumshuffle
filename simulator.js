@@ -1,4 +1,4 @@
-﻿// Web Audio API Sample-based Synthesizer Update
+// Web Audio API Sample-based Synthesizer Update
 let audioCtx;
 let recordedNotes = [];
 let isRecording = false;
@@ -155,7 +155,7 @@ function handlePadPlay(pad) {
 
 const handleKeyDown = (e) => {
     const key = e.key.toLowerCase();
-    const pad = document.querySelector(.drum-pad[data-key=" + key + "]);
+    const pad = document.querySelector('.drum-pad[data-key="' + key + '"]');
     if (pad && !pad.classList.contains('playing')) {
         handlePadPlay(pad);
     }
@@ -206,7 +206,7 @@ export function initSimulator() {
                 isRecording = false;
                 recordBtn.innerHTML = '<i data-feather="circle" class="text-red"></i> Record MIDI (Demo)';
                 recordBtn.classList.remove('recording-active');
-                statusText.innerText = Ready ( + recordedNotes.length +  notes);
+                statusText.innerText = 'Ready (' + recordedNotes.length + ' notes)';
                 statusText.style.color = 'var(--text-secondary)';
                 if(recordedNotes.length > 0) playBtn.disabled = false;
                 if (window.feather) window.feather.replace();
@@ -228,7 +228,7 @@ export function initSimulator() {
             
             recordedNotes.forEach(note => {
                 setTimeout(() => {
-                    const pad = document.querySelector(.drum-pad[data-sound=" + note.sound + "]);
+                    const pad = document.querySelector('.drum-pad[data-sound="' + note.sound + '"]');
                     if(pad) handlePadPlay(pad);
                 }, note.time);
             });
@@ -239,7 +239,7 @@ export function initSimulator() {
                 isPlaying = false;
                 playBtn.disabled = false;
                 recordBtn.disabled = false;
-                statusText.innerText = Ready ( + recordedNotes.length +  notes);
+                statusText.innerText = 'Ready (' + recordedNotes.length + ' notes)';
                 statusText.style.color = 'var(--text-secondary)';
             }, lastNoteTime + 500);
         });
