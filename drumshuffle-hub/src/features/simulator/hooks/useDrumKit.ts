@@ -50,18 +50,27 @@ export function useDrumKit() {
     const floorTom = new Tone.MembraneSynth({ pitchDecay: 0.05, octaves: 4, envelope: { attack: 0.001, decay: 0.6, sustain: 0, release: 1.4 } }).toDestination();
     
     // Cymbals
-    const crash = new Tone.MetalSynth({ frequency: 300, envelope: { attack: 0.001, decay: 2.5, release: 2 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const ride = new Tone.MetalSynth({ frequency: 400, envelope: { attack: 0.001, decay: 1.5, release: 1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const splash = new Tone.MetalSynth({ frequency: 500, envelope: { attack: 0.001, decay: 0.8, release: 1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const china = new Tone.MetalSynth({ frequency: 250, envelope: { attack: 0.001, decay: 1.8, release: 1.5 }, harmonicity: 4.1, modulationIndex: 64, resonance: 4000, octaves: 1.5 }).toDestination();
+    const crash = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 2.5, release: 2 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const ride = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 1.5, release: 1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const splash = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.8, release: 1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const china = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 1.8, release: 1.5 }, harmonicity: 4.1, modulationIndex: 64, resonance: 4000, octaves: 1.5 }).toDestination();
     
     // HiHats
-    const hihatClosed = new Tone.MetalSynth({ frequency: 600, envelope: { attack: 0.001, decay: 0.1, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const hihatOpen = new Tone.MetalSynth({ frequency: 600, envelope: { attack: 0.001, decay: 0.6, release: 0.1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const hihatClosed = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.1, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const hihatOpen = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.6, release: 0.1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
     
     // Cowbell
-    const cowbell = new Tone.MetalSynth({ frequency: 800, envelope: { attack: 0.001, decay: 0.2, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const cowbell = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.2, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
     
+    // Set frequencies
+    crash.frequency.value = 300;
+    ride.frequency.value = 400;
+    splash.frequency.value = 500;
+    china.frequency.value = 250;
+    hihatClosed.frequency.value = 600;
+    hihatOpen.frequency.value = 600;
+    cowbell.frequency.value = 800;
+
     // Adjust volumes for mix
     crash.volume.value = -8;
     ride.volume.value = -10;

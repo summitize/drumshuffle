@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, use } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import * as Tone from "tone";
 import { MetronomeState, Subdivision, SoundType } from "../types";
 
