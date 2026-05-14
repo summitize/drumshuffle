@@ -14,7 +14,8 @@ const MOCK_VIDEOS = [
 
 const playTing = () => {
   try {
-    const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as typeof AudioContext;
+    // @ts-ignore
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     const ctx = new AudioContextClass();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();

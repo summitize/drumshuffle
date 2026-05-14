@@ -67,7 +67,7 @@ export function MetronomeUI() {
         <BeatVisualizer 
           beatsPerMeasure={state.beatsPerMeasure}
           currentBeat={currentBeat}
-          currentSub={currentSub}
+          currentSub={currentSubdivision}
           isPlaying={state.isPlaying}
           accentFirstBeat={state.accentFirstBeat}
         />
