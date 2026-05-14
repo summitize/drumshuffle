@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import * as Tone from "tone";
-import { DrumType, DrumEvent, RecordingTrack } from "../types";
+import { DrumType, DrumEvent } from "../types";
 
 export function useDrumKit() {
   const [isReady, setIsReady] = useState(false);
@@ -15,7 +15,7 @@ export function useDrumKit() {
   const playbackLoops = useRef<Tone.Part | null>(null);
 
   // Synths
-  const synths = useRef<any>({});
+  const synths = useRef<Record<string, { play: (vel: number) => void }>>({});
 
   const initAudio = useCallback(async () => {
     await Tone.start();

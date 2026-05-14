@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import * as Tone from "tone";
-import { MetronomeState, Subdivision, SoundType } from "../types";
+import { MetronomeState, SoundType } from "../types";
 
 export function useMetronome() {
   const [state, setState] = useState<MetronomeState>({
@@ -15,7 +15,7 @@ export function useMetronome() {
   });
 
   const [currentBeat, setCurrentBeat] = useState(0);
-  const [currentSub, setCurrentSub] = useState(0);
+  const [currentSubdivision, setCurrentSubdivision] = useState(0);
 
   const synths = useRef<Record<SoundType, { high: Tone.Synth | Tone.MembraneSynth | Tone.MetalSynth, low: Tone.Synth | Tone.MembraneSynth | Tone.MetalSynth }> | null>(null);
   const loop = useRef<Tone.Sequence | null>(null);
@@ -60,7 +60,7 @@ export function useMetronome() {
     Tone.Transport.bpm.value = state.bpm;
   }, [state.bpm]);
 
-  const startPlayback = async () => {
+  const startPlayback = useCallback(async () => {
     await Tone.start();
 
     if (loop.current) {
@@ -72,13 +72,13 @@ export function useMetronome() {
 
     let stepNumber = 0;
 
-    loop.current = new Tone.Sequence((time, _) => {
+    loop.current = new Tone.Sequence((time) => {
       const beat = Math.floor(stepNumber / subCount);
       const sub = stepNumber % subCount;
 
       Tone.Draw.schedule(() => {
         setCurrentBeat(beat);
-        setCurrentSub(sub);
+        setCurrentSubdivision(sub);
       }, time);
 
       const isAccent = sub === 0 && beat === 0 && state.accentFirstBeat;

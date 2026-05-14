@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Download, Music, Disc, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const SAMPLE_PACKS = [
   { id: 1, title: "Vintage Funk Breakbeats", genre: "Funk", files: 124, size: "450MB", image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop" },

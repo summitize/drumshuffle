@@ -1,6 +1,6 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Drum, Github, Youtube, Music } from "lucide-react";
-import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
 
 const SOCIAL_LINKS = [
   { label: "GitHub",  href: "https://github.com/drumshuffle", icon: Github },

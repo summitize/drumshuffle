@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlayCircle, Youtube } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 // Placeholder data for YouTube integration
 const MOCK_VIDEOS = [
@@ -15,7 +14,8 @@ const MOCK_VIDEOS = [
 
 const playTing = () => {
   try {
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as typeof AudioContext;
+    const ctx = new AudioContextClass();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = "sine";
@@ -27,7 +27,7 @@ const playTing = () => {
     gain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.3);
-  } catch (e) {
+  } catch {
     // Ignore audio errors
   }
 };
