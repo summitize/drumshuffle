@@ -81,18 +81,18 @@ export function useDrumKit() {
     cowbell.volume.value = -15;
 
     synths.current = {
-      kick: { play: (vel: number) => kick.triggerAttackRelease("C1", "8n", undefined, vel) },
-      snare: { play: (vel: number) => { snareDrum.triggerAttackRelease("G2", "8n", undefined, vel); snareNoise.triggerAttackRelease("8n", undefined, vel); } },
-      tom1: { play: (vel: number) => tom1.triggerAttackRelease("C3", "8n", undefined, vel) },
-      tom2: { play: (vel: number) => tom2.triggerAttackRelease("A2", "8n", undefined, vel) },
-      floorTom: { play: (vel: number) => floorTom.triggerAttackRelease("E2", "8n", undefined, vel) },
-      crash: { play: (vel: number) => crash.triggerAttackRelease("8n", undefined, vel) },
-      ride: { play: (vel: number) => ride.triggerAttackRelease("8n", undefined, vel) },
-      splash: { play: (vel: number) => splash.triggerAttackRelease("8n", undefined, vel) },
-      china: { play: (vel: number) => china.triggerAttackRelease("8n", undefined, vel) },
-      hihatClosed: { play: (vel: number) => hihatClosed.triggerAttackRelease("8n", undefined, vel) },
-      hihatOpen: { play: (vel: number) => hihatOpen.triggerAttackRelease("8n", undefined, vel) },
-      cowbell: { play: (vel: number) => cowbell.triggerAttackRelease("8n", undefined, vel) },
+      kick: { play: (vel: number) => kick.triggerAttackRelease("C1", "8n", Tone.now(), vel) },
+      snare: { play: (vel: number) => { snareDrum.triggerAttackRelease("G2", "8n", Tone.now(), vel); snareNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
+      tom1: { play: (vel: number) => tom1.triggerAttackRelease("C3", "8n", Tone.now(), vel) },
+      tom2: { play: (vel: number) => tom2.triggerAttackRelease("A2", "8n", Tone.now(), vel) },
+      floorTom: { play: (vel: number) => floorTom.triggerAttackRelease("E2", "8n", Tone.now(), vel) },
+      crash: { play: (vel: number) => crash.triggerAttackRelease("8n", Tone.now(), vel) },
+      ride: { play: (vel: number) => ride.triggerAttackRelease("8n", Tone.now(), vel) },
+      splash: { play: (vel: number) => splash.triggerAttackRelease("8n", Tone.now(), vel) },
+      china: { play: (vel: number) => china.triggerAttackRelease("8n", Tone.now(), vel) },
+      hihatClosed: { play: (vel: number) => hihatClosed.triggerAttackRelease("8n", Tone.now(), vel) },
+      hihatOpen: { play: (vel: number) => hihatOpen.triggerAttackRelease("8n", Tone.now(), vel) },
+      cowbell: { play: (vel: number) => cowbell.triggerAttackRelease("8n", Tone.now(), vel) },
     };
 
     setIsReady(true);
