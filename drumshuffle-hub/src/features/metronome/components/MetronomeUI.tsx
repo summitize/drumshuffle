@@ -11,7 +11,7 @@ export function MetronomeUI() {
     state,
     setState,
     currentBeat,
-    currentSub,
+    currentSubdivision,
     togglePlay,
   } = useMetronome();
 
