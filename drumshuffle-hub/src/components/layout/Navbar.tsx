@@ -35,10 +35,6 @@ export function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
-  const toggleTheme = useCallback(() => {
-    document.documentElement.classList.toggle('dark');
-  }, []);
-
   return (
     <header
       className={cn(

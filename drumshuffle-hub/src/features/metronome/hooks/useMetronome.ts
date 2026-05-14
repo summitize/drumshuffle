@@ -145,3 +145,5 @@ export function useMetronome() {
     stopPlayback
   };
 }
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
