@@ -17,7 +17,7 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
   const controls = useAnimation();
   const padRef = useRef<HTMLButtonElement>(null);
 
-  const hitPad = (velocity: number = 1) => {
+  const hitPad = useCallback((velocity: number = 1) => {
     if (!isReady) return;
     
     // Trigger sound
@@ -41,7 +41,7 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
         transition: { duration: 0.2 }
       });
     }
-  };
+  }, [id, isReady, onPlay, type, controls, color]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,7 +56,7 @@ export function DrumPad({ id, label, keybind, type, color, onPlay, isReady }: Dr
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [keybind, isReady, onPlay, id]);
+  }, [keybind, hitPad]);
 
   return (
     <motion.button
