@@ -14,12 +14,17 @@ export default function AboutPage() {
     { text: '50 Subscribers', completed: true },
     { text: '100 Subscribers', completed: true },
     { text: '500 Subscribers', completed: false },
-    { text: '1000 Subscribers', completed: false },
+    { text: '1k Subscribers', completed: false },
+    { text: '2k Subscribers', completed: false },
+    { text: '3k Subscribers', completed: false },
+    { text: '4k Subscribers', completed: false },
     { text: '5k Subscribers', completed: false },
     { text: '10k Subscribers', completed: false },
     { text: '50k Subscribers', completed: false },
     { text: '100k Subscribers', completed: false },
     { text: '1M Subscribers', completed: false },
+    { text: '2M Subscribers', completed: false },
+    { text: '5M Subscribers', completed: false },
   ]
 
   const passions = [
@@ -167,7 +172,7 @@ export default function AboutPage() {
                 Subscriber Milestones
               </h3>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {milestones.map((m, idx) => (
                   <div
                     key={idx}
