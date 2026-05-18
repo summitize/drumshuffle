@@ -6,6 +6,19 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
+  // Check custom session cookie first to support serverless client-side mode
+  const adminSessionCookie = request.cookies.get('admin_session')?.value
+  const isCustomAuthenticated = adminSessionCookie === 'authenticated'
+
+  if (isCustomAuthenticated) {
+    if (request.nextUrl.pathname.startsWith('/admin/login')) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/admin'
+      return NextResponse.redirect(url)
+    }
+    return supabaseResponse
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 

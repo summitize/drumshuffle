@@ -19,7 +19,6 @@ import {
   Search,
   Bell
 } from 'lucide-react'
-import { logout } from './login/actions'
 
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
@@ -40,8 +39,10 @@ export default function AdminLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  const handleLogout = async () => {
-    await logout()
+  const handleLogout = () => {
+    document.cookie = "admin_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+    localStorage.removeItem('admin_session')
+    window.location.href = '/admin/login'
   }
 
   return (

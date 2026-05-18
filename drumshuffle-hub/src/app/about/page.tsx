@@ -83,8 +83,8 @@ export default function AboutPage() {
               {/* Main Photo Container */}
               <div className="relative w-80 h-96 sm:w-96 sm:h-[480px] rounded-3xl overflow-hidden border border-white/10 bg-black/40 backdrop-blur-xl">
                 <Image
-                  src="/about_me_drummer.png"
-                  alt="Drummer profile"
+                  src="/about_me_ved.jpg"
+                  alt="Ved - Founder of DrumShuffle"
                   fill
                   sizes="(max-w-768px) 100vw, 384px"
                   priority
@@ -112,7 +112,7 @@ export default function AboutPage() {
           >
             <div className="space-y-6">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-                Hey, I&apos;m Sumeet <span className="text-brand-400">👋</span>
+                Hey, I&apos;m Ved, founder of DrumShuffle <span className="text-brand-400">👋</span>
               </h2>
               <p className="text-night-200 text-base sm:text-lg leading-relaxed font-light">
                 I am an enthusiastic drummer utilizing the Alesis Nitro Max E-Drum Kit to fuel my passion for creating music. As a hobbyist, I love capturing my progress through engaging videos, turning my practice sessions into fun and inspiring visual content. Additionally, I enjoy making dynamic drum covers of a wide range of songs, especially within the rock genre, to showcase my skills and share my love for music with a broader audience.
@@ -202,6 +202,17 @@ export default function AboutPage() {
             >
               <Youtube className="w-5 h-5 fill-current" />
               Subscribe on YouTube
+            </a>
+            <a 
+              href="https://www.discord.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-xl font-bold transition-colors flex items-center gap-2 shadow-lg shadow-[#5865F2]/20"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.45-5c1,.73,2,1.48,3,2.2a74.77,74.77,0,0,0,91.9,0c1-.72,2-1.47,3-2.2a68.86,68.86,0,0,1-10.44,5,77.26,77.26,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31-18.83C129,54.65,122.54,31.58,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/>
+              </svg>
+              Join Our Discord
             </a>
             <Link 
               href="/contact" 

@@ -70,11 +70,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl text-night-300 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-lg sm:text-xl text-night-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light"
           >
-            The all-in-one platform for drummers. Play an interactive e-drum simulator,
-            explore studio-grade sample packs, follow structured lessons, and join a
-            global community of rhythm creators.
+            The Official Drumshuffle Wensite, DrumshuffleHub. Built from scratch with no experience of coding. Utilities for all drummers like metronome, drum simulator, drum covers, song notations and much more all in one place, that too for absolutely no fees.
           </motion.p>
 
           {/* CTA Buttons */}

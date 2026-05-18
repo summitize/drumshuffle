@@ -74,8 +74,24 @@ export function useDrumKit() {
     const hihatOpen = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.4, release: 0.4 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
     const hihatOpenNoise = new Tone.NoiseSynth({ envelope: { attack: 0.001, decay: 0.3, sustain: 0, release: 0.3 } }).connect(hihatFilter);
     
-    // Cowbell
-    const cowbell = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.2, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    // Cowbell (High-fidelity TR-808 dual square-wave synthesis)
+    const cowbellFilter = new Tone.Filter({
+      type: "bandpass",
+      Q: 12,
+      frequency: 800
+    }).toDestination();
+    const cowbellEnv = new Tone.AmplitudeEnvelope({
+      attack: 0.001,
+      decay: 0.15,
+      sustain: 0,
+      release: 0.15
+    }).connect(cowbellFilter);
+    const cowbellOsc1 = new Tone.Oscillator(540, "square").connect(cowbellEnv);
+    const cowbellOsc2 = new Tone.Oscillator(800, "square").connect(cowbellEnv);
+    cowbellOsc1.volume.value = -4;
+    cowbellOsc2.volume.value = -4;
+    cowbellOsc1.start();
+    cowbellOsc2.start();
     
     // Set frequencies
     crash.frequency.value = 300;
@@ -84,7 +100,6 @@ export function useDrumKit() {
     china.frequency.value = 250;
     hihatClosed.frequency.value = 600;
     hihatOpen.frequency.value = 600;
-    cowbell.frequency.value = 800;
 
     // Adjust volumes for mix
     crash.volume.value = -6;
@@ -99,7 +114,6 @@ export function useDrumKit() {
     hihatClosedNoise.volume.value = -18;
     hihatOpen.volume.value = -10;
     hihatOpenNoise.volume.value = -16;
-    cowbell.volume.value = -15;
 
     synths.current = {
       kick: { play: (vel: number) => kick.triggerAttackRelease("C1", "8n", Tone.now(), vel) },
@@ -113,7 +127,7 @@ export function useDrumKit() {
       china: { play: (vel: number) => { china.triggerAttackRelease("8n", Tone.now(), vel); chinaNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
       hihatClosed: { play: (vel: number) => { hihatClosed.triggerAttackRelease("8n", Tone.now(), vel); hihatClosedNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
       hihatOpen: { play: (vel: number) => { hihatOpen.triggerAttackRelease("8n", Tone.now(), vel); hihatOpenNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
-      cowbell: { play: (vel: number) => cowbell.triggerAttackRelease("8n", Tone.now(), vel) },
+      cowbell: { play: (vel: number) => cowbellEnv.triggerAttackRelease("8n", Tone.now(), vel) },
     };
 
     setIsReady(true);
