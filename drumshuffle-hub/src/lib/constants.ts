@@ -3,6 +3,7 @@ export const NAV_LINKS = [
   { label: "Metronome",      href: "/metronome" },
   { label: "Drum Simulator", href: "/simulator" },
   { label: "Drum Sheets",    href: "/sheets" },
+  { label: "Sound Store",    href: "/store" },
   { label: "About",          href: "/about" },
   { label: "Contact",        href: "/contact" },
 ] as const;
