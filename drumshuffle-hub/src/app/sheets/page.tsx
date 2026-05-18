@@ -15,46 +15,62 @@ interface CustomSheet {
 }
 
 const DEFAULT_SHEETS = [
-  {
-    id: "default-sheet-1",
-    title: "Back In Black",
-    artist: "AC/DC",
-    genre: "Rock",
-    difficulty: "Beginner",
-    archiveUrl: "https://archive.org",
-  },
-  {
-    id: "default-sheet-2",
-    title: "Enter Sandman",
-    artist: "Metallica",
-    genre: "Metal",
-    difficulty: "Intermediate",
-    archiveUrl: "https://archive.org",
-  },
-  {
-    id: "default-sheet-3",
-    title: "Tom Sawyer",
-    artist: "Rush",
-    genre: "Rock",
-    difficulty: "Advanced",
-    archiveUrl: "https://archive.org",
-  },
-  {
-    id: "default-sheet-4",
-    title: "Fifty-Fifty",
-    artist: "Frank Zappa",
-    genre: "Jazz",
-    difficulty: "Advanced",
-    archiveUrl: "https://archive.org",
-  },
-  {
-    id: "default-sheet-5",
-    title: "Billie Jean",
-    artist: "Michael Jackson",
-    genre: "Pop",
-    difficulty: "Beginner",
-    archiveUrl: "https://archive.org",
-  },
+  // Linkin Park
+  { id: "lp-1", title: "In The End", artist: "Linkin Park", genre: "Rock", difficulty: "Intermediate" },
+  { id: "lp-2", title: "Numb", artist: "Linkin Park", genre: "Rock", difficulty: "Beginner" },
+  { id: "lp-3", title: "Crawling", artist: "Linkin Park", genre: "Rock", difficulty: "Intermediate" },
+  { id: "lp-4", title: "Faint", artist: "Linkin Park", genre: "Rock", difficulty: "Intermediate" },
+  { id: "lp-5", title: "What I've Done", artist: "Linkin Park", genre: "Rock", difficulty: "Beginner" },
+  { id: "lp-6", title: "One Step Closer", artist: "Linkin Park", genre: "Rock", difficulty: "Intermediate" },
+
+  // Metallica
+  { id: "met-1", title: "Enter Sandman", artist: "Metallica", genre: "Metal", difficulty: "Intermediate" },
+  { id: "met-2", title: "Master Of Puppets", artist: "Metallica", genre: "Metal", difficulty: "Advanced" },
+  { id: "met-3", title: "Nothing Else Matters", artist: "Metallica", genre: "Metal", difficulty: "Beginner" },
+  { id: "met-4", title: "One", artist: "Metallica", genre: "Metal", difficulty: "Advanced" },
+  { id: "met-5", title: "Sad But True", artist: "Metallica", genre: "Metal", difficulty: "Intermediate" },
+  { id: "met-6", title: "Fade To Black", artist: "Metallica", genre: "Metal", difficulty: "Intermediate" },
+
+  // Michael Jackson
+  { id: "mj-1", title: "Billie Jean", artist: "Michael Jackson", genre: "Pop", difficulty: "Beginner" },
+  { id: "mj-2", title: "Beat It", artist: "Michael Jackson", genre: "Pop", difficulty: "Intermediate" },
+  { id: "mj-3", title: "Thriller", artist: "Michael Jackson", genre: "Pop", difficulty: "Intermediate" },
+  { id: "mj-4", title: "Smooth Criminal", artist: "Michael Jackson", genre: "Pop", difficulty: "Intermediate" },
+  { id: "mj-5", title: "Bad", artist: "Michael Jackson", genre: "Pop", difficulty: "Beginner" },
+
+  // AC/DC
+  { id: "acdc-1", title: "Back In Black", artist: "AC/DC", genre: "Rock", difficulty: "Beginner" },
+  { id: "acdc-2", title: "Highway To Hell", artist: "AC/DC", genre: "Rock", difficulty: "Beginner" },
+  { id: "acdc-3", title: "Thunderstruck", artist: "AC/DC", genre: "Rock", difficulty: "Intermediate" },
+  { id: "acdc-4", title: "You Shook Me All Night Long", artist: "AC/DC", genre: "Rock", difficulty: "Beginner" },
+  { id: "acdc-5", title: "T.N.T.", artist: "AC/DC", genre: "Rock", difficulty: "Beginner" },
+
+  // Nirvana
+  { id: "nir-1", title: "Smells Like Teen Spirit", artist: "Nirvana", genre: "Grunge", difficulty: "Intermediate" },
+  { id: "nir-2", title: "Come As You Are", artist: "Nirvana", genre: "Grunge", difficulty: "Beginner" },
+  { id: "nir-3", title: "Lithium", artist: "Nirvana", genre: "Grunge", difficulty: "Beginner" },
+
+  // Queen
+  { id: "q-1", title: "Bohemian Rhapsody", artist: "Queen", genre: "Rock", difficulty: "Advanced" },
+  { id: "q-2", title: "We Will Rock You", artist: "Queen", genre: "Rock", difficulty: "Beginner" },
+  { id: "q-3", title: "Another One Bites The Dust", artist: "Queen", genre: "Rock", difficulty: "Beginner" },
+
+  // Green Day
+  { id: "gd-1", title: "Boulevard Of Broken Dreams", artist: "Green Day", genre: "Rock", difficulty: "Beginner" },
+  { id: "gd-2", title: "Basket Case", artist: "Green Day", genre: "Punk", difficulty: "Intermediate" },
+  { id: "gd-3", title: "American Idiot", artist: "Green Day", genre: "Punk", difficulty: "Intermediate" },
+
+  // Led Zeppelin
+  { id: "lz-1", title: "Stairway To Heaven", artist: "Led Zeppelin", genre: "Rock", difficulty: "Intermediate" },
+  { id: "lz-2", title: "Whole Lotta Love", artist: "Led Zeppelin", genre: "Rock", difficulty: "Intermediate" },
+
+  // Slipknot
+  { id: "slip-1", title: "Duality", artist: "Slipknot", genre: "Metal", difficulty: "Advanced" },
+  { id: "slip-2", title: "Psychosocial", artist: "Slipknot", genre: "Metal", difficulty: "Advanced" },
+
+  // Red Hot Chili Peppers
+  { id: "rhcp-1", title: "Californication", artist: "Red Hot Chili Peppers", genre: "Rock", difficulty: "Beginner" },
+  { id: "rhcp-2", title: "Dani California", artist: "Red Hot Chili Peppers", genre: "Rock", difficulty: "Intermediate" },
 ]
 
 export default function SheetsPage() {
@@ -80,9 +96,16 @@ export default function SheetsPage() {
       artist: s.artist,
       genre: s.genre,
       difficulty: s.difficulty,
-      archiveUrl: s.archiveUrl,
+      archiveUrl: s.archiveUrl || `https://www.songsterr.com/?pattern=${encodeURIComponent(s.artist + " " + s.title)}`,
     })),
-    ...DEFAULT_SHEETS
+    ...DEFAULT_SHEETS.map(s => ({
+      id: s.id,
+      title: s.title,
+      artist: s.artist,
+      genre: s.genre,
+      difficulty: s.difficulty,
+      archiveUrl: `https://www.songsterr.com/?pattern=${encodeURIComponent(s.artist + " " + s.title)}`,
+    }))
   ]
 
   // Filter sheets
@@ -94,7 +117,7 @@ export default function SheetsPage() {
     return matchesSearch && matchesGenre && matchesDifficulty
   })
 
-  const genres = ['All', 'Rock', 'Metal', 'Jazz', 'Pop', 'Funk', 'Blues', 'Punk']
+  const genres = ['All', 'Rock', 'Metal', 'Grunge', 'Pop', 'Punk', 'Jazz', 'Funk', 'Blues']
   const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced']
 
   return (
