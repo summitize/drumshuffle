@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, Calendar, CheckCircle2, Circle, Target, Music, Video, Star, Youtube, X, Key, Info } from 'lucide-react'
+import { Sparkles, Calendar, CheckCircle2, Circle, Target, Music, Video, Star, Youtube, X, Key, Info, Layers, Smartphone, Camera, ExternalLink, Drum, Cable } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -209,6 +209,183 @@ export default function AboutPage() {
                 <p className="text-night-300 text-sm leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+
+        {/* My Gear Section */}
+        <div className="border-t border-white/5 pt-20 mt-20">
+          <div className="text-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center justify-center gap-2 mb-3"
+            >
+              <Layers className="w-5 h-5 text-brand-400" />
+              <span className="text-sm font-bold text-brand-400 tracking-[0.2em] uppercase">Setup & Tech</span>
+            </motion.div>
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">All About My Gear</h3>
+            <p className="text-night-400 max-w-lg mx-auto">The exact instruments, electronics, and mounts used to capture the rhythm.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* 1. Drums */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="glass-card bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 p-6 rounded-3xl hover:border-brand-500/20 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/20 text-brand-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Drum className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">E-Drum Kit</h4>
+                <p className="text-night-300 text-sm leading-relaxed mb-4">
+                  <span className="font-semibold text-white">Alesis Nitro Max</span> – Premium 8-piece electronic setup featuring highly responsive, ultra-quiet mesh heads and the ultimate BFD drum module.
+                </p>
+              </div>
+              <a 
+                href="https://www.amazon.com/Alesis-Nitro-Max-Kit-Electronic/dp/B0CG7G4N6H" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 text-xs font-bold text-brand-400 hover:text-brand-300 transition-colors mt-auto"
+              >
+                Purchase E-Drum Kit
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </motion.div>
+
+            {/* 2. Camera */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="glass-card bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 p-6 rounded-3xl hover:border-purple-500/20 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 text-purple-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Smartphone className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">Recording Camera</h4>
+                <p className="text-night-300 text-sm leading-relaxed mb-4">
+                  <span className="font-semibold text-white">OnePlus 5</span> – High-fidelity (A5000 6/64 config) dual camera configuration for capturing clean, high frame-rate drumming practice videos.
+                </p>
+              </div>
+              <a 
+                href="https://www.gsmarena.com/oneplus_5-8647.php" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors mt-auto"
+              >
+                View Specifications
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </motion.div>
+
+            {/* 3. Audio Interface */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="glass-card bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 p-6 rounded-3xl hover:border-emerald-500/20 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Music className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">Audio Interface</h4>
+                <p className="text-night-300 text-sm leading-relaxed mb-4">
+                  <span className="font-semibold text-white">iRig 1</span> – High-fidelity analog guitar/instrument interface used for routing clean stereo drum module audio output directly to mobile camera recordings.
+                </p>
+              </div>
+              <a 
+                href="https://www.amazon.com/IK-Multimedia-iRig-guitar-interface/dp/B003WODY72" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors mt-auto"
+              >
+                iRig Amazon Link
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </motion.div>
+
+            {/* 4. Tripod */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="glass-card bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 p-6 rounded-3xl hover:border-blue-500/20 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Camera className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">Studio Tripod</h4>
+                <p className="text-night-300 text-sm leading-relaxed mb-4">
+                  <span className="font-semibold text-white">2.1 Meter Tripod</span> – Sturdy, extra-tall frame ensuring stable top-down and shoulder drumming perspective recordings. Purchased in gadgethub, Langkawi, Malaysia.
+                </p>
+              </div>
+              <span className="text-xs text-night-500 font-semibold uppercase mt-auto">
+                Bought in Langkawi
+              </span>
+            </motion.div>
+
+            {/* 5. Guitar Cable */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="glass-card bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 p-6 rounded-3xl hover:border-pink-500/20 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-pink-600/20 text-pink-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Cable className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">Guitar Cable</h4>
+                <p className="text-night-300 text-sm leading-relaxed mb-4">
+                  <span className="font-semibold text-white">Gold Plated Cable</span> – Sturdy 1-meter gold-plated instrument connector for noiseless analog transfer. Purchased in a local hardware shop.
+                </p>
+              </div>
+              <span className="text-xs text-night-500 font-semibold uppercase mt-auto">
+                Bought Locally
+              </span>
+            </motion.div>
+
+            {/* 6. Phone Holder */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="glass-card bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 p-6 rounded-3xl hover:border-amber-500/20 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/20 text-amber-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Smartphone className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">Tripod Phone Holder</h4>
+                <p className="text-night-300 text-sm leading-relaxed mb-4">
+                  <span className="font-semibold text-white">Universal Mount</span> – Sturdy locking mount phone holder with rotating capability to keep OnePlus 5 perfectly secured to the tripod frame.
+                </p>
+              </div>
+              <a 
+                href="https://amzn.in/d/05juRSid" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors mt-auto"
+              >
+                Purchase Phone Holder
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </motion.div>
+
           </div>
         </div>
 
