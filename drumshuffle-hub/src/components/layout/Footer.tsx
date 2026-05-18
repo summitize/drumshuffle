@@ -18,24 +18,6 @@ const FOOTER_SECTIONS = [
       { label: "Metronome",      href: "/metronome" },
     ],
   },
-  {
-    title: "Community",
-    links: [
-      { label: "Discord",    href: "/community" },
-      { label: "Blog",       href: "/blog" },
-      { label: "Challenges", href: "/challenges" },
-      { label: "Showcase",   href: "/showcase" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About",   href: "/about" },
-      { label: "Careers",  href: "/careers" },
-      { label: "Privacy",  href: "/privacy" },
-      { label: "Terms",    href: "/terms" },
-    ],
-  },
 ];
 
 export function Footer() {
@@ -45,9 +27,9 @@ export function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
           {/* Brand */}
-          <div className="col-span-2">
+          <div className="sm:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-brand-700 flex items-center justify-center">
                 <Drum className="w-5 h-5 text-white" />

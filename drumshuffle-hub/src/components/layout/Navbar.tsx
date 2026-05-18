@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Drum, ChevronRight } from "lucide-react";
+import { Menu, X, Drum, ChevronRight, Sparkles } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -118,6 +118,23 @@ export function Navbar() {
 
           {/* Desktop Controls */}
           <div className="hidden lg:flex items-center gap-4">
+            <Link href="/changelog">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 text-sm font-semibold text-night-200 hover:text-white cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-brand-400" />
+                <span>Changelog</span>
+                
+                {/* Animated notification dot */}
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                </span>
+              </motion.div>
+            </Link>
+
             <button
               onClick={() => {
                 document.documentElement.classList.toggle('dark');
@@ -180,6 +197,23 @@ export function Navbar() {
                   </motion.div>
                 );
               })}
+              
+              {/* Mobile Changelog Button */}
+              <motion.div variants={itemVariants} className="pt-2">
+                <Link
+                  href="/changelog"
+                  className="flex items-center justify-between px-5 py-4 rounded-2xl text-base font-semibold transition-all duration-300 text-night-300 hover:bg-white/[0.04] hover:text-white"
+                >
+                  <span className="flex items-center gap-3">
+                    <Sparkles className="w-5 h-5 text-brand-400" />
+                    Changelog
+                  </span>
+                  <span className="relative flex h-2 w-2 mr-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                  </span>
+                </Link>
+              </motion.div>
               
               <motion.div variants={itemVariants} className="pt-6 mt-6 border-t border-white/[0.08] flex justify-center">
                 <button

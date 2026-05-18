@@ -49,15 +49,30 @@ export function useDrumKit() {
     const tom2 = new Tone.MembraneSynth({ pitchDecay: 0.05, octaves: 4, envelope: { attack: 0.001, decay: 0.5, sustain: 0, release: 1.4 } }).toDestination();
     const floorTom = new Tone.MembraneSynth({ pitchDecay: 0.05, octaves: 4, envelope: { attack: 0.001, decay: 0.6, sustain: 0, release: 1.4 } }).toDestination();
     
+    // Filters for high-passing noise to simulate cymbals shimmering wash
+    const cymbalFilter = new Tone.Filter(7000, "highpass").toDestination();
+    const hihatFilter = new Tone.Filter(9000, "highpass").toDestination();
+    const chinaFilter = new Tone.Filter(4500, "highpass").toDestination();
+
     // Cymbals
-    const crash = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 2.5, release: 2 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const ride = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 1.5, release: 1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const splash = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.8, release: 1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const china = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 1.8, release: 1.5 }, harmonicity: 4.1, modulationIndex: 64, resonance: 4000, octaves: 1.5 }).toDestination();
+    const crash = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 2.0, release: 2.0 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const crashNoise = new Tone.NoiseSynth({ envelope: { attack: 0.002, decay: 1.5, sustain: 0, release: 1.5 } }).connect(cymbalFilter);
+
+    const ride = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 1.2, release: 1.2 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const rideNoise = new Tone.NoiseSynth({ envelope: { attack: 0.002, decay: 0.8, sustain: 0, release: 0.8 } }).connect(cymbalFilter);
+
+    const splash = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.6, release: 0.6 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const splashNoise = new Tone.NoiseSynth({ envelope: { attack: 0.001, decay: 0.4, sustain: 0, release: 0.4 } }).connect(cymbalFilter);
+
+    const china = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 1.5, release: 1.5 }, harmonicity: 4.1, modulationIndex: 64, resonance: 4000, octaves: 1.5 }).toDestination();
+    const chinaNoise = new Tone.NoiseSynth({ envelope: { attack: 0.003, decay: 1.2, sustain: 0, release: 1.2 } }).connect(chinaFilter);
     
     // HiHats
-    const hihatClosed = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.1, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
-    const hihatOpen = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.6, release: 0.1 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const hihatClosed = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.05, release: 0.05 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const hihatClosedNoise = new Tone.NoiseSynth({ envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.05 } }).connect(hihatFilter);
+
+    const hihatOpen = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.4, release: 0.4 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
+    const hihatOpenNoise = new Tone.NoiseSynth({ envelope: { attack: 0.001, decay: 0.3, sustain: 0, release: 0.3 } }).connect(hihatFilter);
     
     // Cowbell
     const cowbell = new Tone.MetalSynth({ envelope: { attack: 0.001, decay: 0.2, release: 0.01 }, harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5 }).toDestination();
@@ -72,12 +87,18 @@ export function useDrumKit() {
     cowbell.frequency.value = 800;
 
     // Adjust volumes for mix
-    crash.volume.value = -8;
-    ride.volume.value = -10;
+    crash.volume.value = -6;
+    crashNoise.volume.value = -12;
+    ride.volume.value = -8;
+    rideNoise.volume.value = -16;
     splash.volume.value = -10;
-    china.volume.value = -6;
+    splashNoise.volume.value = -14;
+    china.volume.value = -4;
+    chinaNoise.volume.value = -10;
     hihatClosed.volume.value = -12;
-    hihatOpen.volume.value = -12;
+    hihatClosedNoise.volume.value = -18;
+    hihatOpen.volume.value = -10;
+    hihatOpenNoise.volume.value = -16;
     cowbell.volume.value = -15;
 
     synths.current = {
@@ -86,12 +107,12 @@ export function useDrumKit() {
       tom1: { play: (vel: number) => tom1.triggerAttackRelease("C3", "8n", Tone.now(), vel) },
       tom2: { play: (vel: number) => tom2.triggerAttackRelease("A2", "8n", Tone.now(), vel) },
       floorTom: { play: (vel: number) => floorTom.triggerAttackRelease("E2", "8n", Tone.now(), vel) },
-      crash: { play: (vel: number) => crash.triggerAttackRelease("8n", Tone.now(), vel) },
-      ride: { play: (vel: number) => ride.triggerAttackRelease("8n", Tone.now(), vel) },
-      splash: { play: (vel: number) => splash.triggerAttackRelease("8n", Tone.now(), vel) },
-      china: { play: (vel: number) => china.triggerAttackRelease("8n", Tone.now(), vel) },
-      hihatClosed: { play: (vel: number) => hihatClosed.triggerAttackRelease("8n", Tone.now(), vel) },
-      hihatOpen: { play: (vel: number) => hihatOpen.triggerAttackRelease("8n", Tone.now(), vel) },
+      crash: { play: (vel: number) => { crash.triggerAttackRelease("8n", Tone.now(), vel); crashNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
+      ride: { play: (vel: number) => { ride.triggerAttackRelease("8n", Tone.now(), vel * 0.8); rideNoise.triggerAttackRelease("8n", Tone.now(), vel * 0.4); } },
+      splash: { play: (vel: number) => { splash.triggerAttackRelease("8n", Tone.now(), vel); splashNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
+      china: { play: (vel: number) => { china.triggerAttackRelease("8n", Tone.now(), vel); chinaNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
+      hihatClosed: { play: (vel: number) => { hihatClosed.triggerAttackRelease("8n", Tone.now(), vel); hihatClosedNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
+      hihatOpen: { play: (vel: number) => { hihatOpen.triggerAttackRelease("8n", Tone.now(), vel); hihatOpenNoise.triggerAttackRelease("8n", Tone.now(), vel); } },
       cowbell: { play: (vel: number) => cowbell.triggerAttackRelease("8n", Tone.now(), vel) },
     };
 
