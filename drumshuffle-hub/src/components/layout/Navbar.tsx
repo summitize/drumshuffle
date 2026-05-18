@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Drum, ChevronRight, Sparkles } from "lucide-react";
+import { Menu, X, Drum, ChevronRight, Sparkles, Search } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { CommandPalette } from "./CommandPalette";
 
 // Framer motion variants for the mobile menu
 const menuVariants = {
@@ -21,6 +22,7 @@ const itemVariants = {
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -117,7 +119,20 @@ export function Navbar() {
           </div>
 
           {/* Desktop Controls */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
+            {/* Global Command Center Search */}
+            <motion.button
+              whileHover={{ scale: 1.05, y: -1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsSearchOpen(true)}
+              className="relative flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 text-sm font-semibold text-night-200 hover:text-white cursor-pointer"
+            >
+              <Search className="w-4 h-4 text-brand-400" />
+              <span>Search</span>
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-white/10 text-[9px] font-mono text-gray-500 ml-1">Ctrl+K</kbd>
+            </motion.button>
+
+            {/* Changelog link */}
             <Link href="/changelog">
               <motion.div
                 whileHover={{ scale: 1.05, y: -1 }}
@@ -134,8 +149,6 @@ export function Navbar() {
                 </span>
               </motion.div>
             </Link>
-
-
           </div>
 
           {/* Mobile toggle */}
@@ -170,6 +183,20 @@ export function Navbar() {
             className="lg:hidden absolute top-full left-0 right-0 overflow-hidden bg-night-950/95 backdrop-blur-3xl border-b border-white/[0.08] shadow-2xl"
           >
             <div className="px-4 py-6 space-y-2 max-h-[calc(100vh-80px)] overflow-y-auto">
+              {/* Mobile Search Button at top */}
+              <motion.div variants={itemVariants} className="pb-2">
+                <button
+                  onClick={() => { setIsOpen(false); setIsSearchOpen(true); }}
+                  className="w-full flex items-center justify-between px-5 py-4 rounded-2xl text-base font-semibold transition-all duration-300 text-night-300 bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:text-white"
+                >
+                  <span className="flex items-center gap-3">
+                    <Search className="w-5 h-5 text-brand-400" />
+                    Command Center Search
+                  </span>
+                  <ChevronRight className="w-5 h-5 text-gray-500" />
+                </button>
+              </motion.div>
+
               {NAV_LINKS.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -206,12 +233,13 @@ export function Navbar() {
                   </span>
                 </Link>
               </motion.div>
-              
-
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mount Command Palette Modal */}
+      <CommandPalette isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 }

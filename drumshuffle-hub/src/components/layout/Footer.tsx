@@ -3,7 +3,7 @@ import { Drum, Github, Youtube, Music } from "lucide-react";
 import { SITE_NAME } from "@/lib/constants";
 
 const SOCIAL_LINKS = [
-  { label: "GitHub",  href: "https://github.com/drumshuffle", icon: Github },
+  { label: "GitHub",  href: "https://github.com/summitize/drumshuffle", icon: Github },
   { label: "YouTube", href: "https://youtube.com/@drumshuffle", icon: Youtube },
   { label: "BandLab", href: "https://bandlab.com/drumshuffle",  icon: Music },
 ];

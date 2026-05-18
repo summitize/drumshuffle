@@ -212,3 +212,28 @@ body {
   0%   { background-position: 0 0; }
   100% { background-position: 0 100%; }
 }
+
+/* ─── Antigravity Float Easter Egg ───────────────────────── */
+@keyframes floatGravityFree {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) rotate(-1deg) scale(1.005);
+  }
+  50% {
+    transform: translateY(-20px) rotate(1deg) scale(0.995);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-0.5deg) scale(1.002);
+  }
+}
+
+.antigravity-floating header,
+.antigravity-floating main,
+.antigravity-floating footer,
+.antigravity-floating section {
+  animation: floatGravityFree 6s ease-in-out infinite;
+  transition: all 0.8s ease-in-out;
+}
+
