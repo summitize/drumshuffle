@@ -1,11 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Sparkles, Calendar, CheckCircle2, Circle, Target, Music, Video, Star, Youtube } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Sparkles, Calendar, CheckCircle2, Circle, Target, Music, Video, Star, Youtube, X, Key, Info } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function AboutPage() {
+  const [tapCount, setTapCount] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const milestones = [
     { text: '50 Subscribers', completed: true },
     { text: '100 Subscribers', completed: true },
@@ -33,6 +37,17 @@ export default function AboutPage() {
       color: 'from-amber-500/20 to-amber-600/20 text-amber-400'
     }
   ]
+
+  const handleImageTap = () => {
+    setTapCount(prev => {
+      const next = prev + 1
+      if (next >= 12) {
+        setIsModalOpen(true)
+        return 0
+      }
+      return next
+    })
+  }
 
   return (
     <div className="min-h-screen bg-[#050508] text-white selection:bg-brand-500/30 relative overflow-hidden pt-28 pb-20">
@@ -76,7 +91,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 flex justify-center"
           >
-            <div className="relative group">
+            <div 
+              onClick={handleImageTap}
+              className="relative group cursor-pointer active:scale-98 transition-transform duration-300"
+            >
               {/* Outer Neon Glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-r from-brand-500 via-purple-600 to-blue-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
               
@@ -90,6 +108,13 @@ export default function AboutPage() {
                   priority
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+
+                {/* Floating Tap Counter Badge */}
+                {tapCount > 0 && (
+                  <div className="absolute top-4 right-4 bg-brand-500/80 backdrop-blur-md text-white font-mono text-xs px-3.5 py-1.5 rounded-full border border-white/20 animate-pulse pointer-events-none z-20 shadow-[0_4px_12px_rgba(255,61,46,0.3)]">
+                    Secrets unlocking: {tapCount}/12
+                  </div>
+                )}
                 
                 {/* Overlay Shimmer */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-transparent" />
@@ -224,6 +249,111 @@ export default function AboutPage() {
         </div>
 
       </div>
+
+      {/* Easter Egg Information Popup Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4 selection:bg-brand-500/30"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              className="relative w-full max-w-xl bg-gradient-to-b from-white/[0.08] to-white/[0.01] border border-white/[0.15] rounded-[2.5rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),inset_0_0_40px_rgba(255,255,255,0.05)] overflow-hidden p-8 backdrop-blur-3xl text-left"
+            >
+              {/* Glow lines */}
+              <div className="absolute top-0 left-1/4 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-500/10 blur-[80px] rounded-full pointer-events-none" />
+
+              {/* Close Button */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-6 right-6 p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all border border-white/5 z-20"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 shadow-[0_0_15px_rgba(255,61,46,0.2)]">
+                  <Key className="w-6 h-6 animate-pulse" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white tracking-wide">Developer Secrets Unlocked!</h3>
+                  <p className="text-xs text-brand-400 font-bold uppercase tracking-widest mt-0.5">DrumShuffle Command Codes</p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm text-gray-300 leading-relaxed font-light mb-6">
+                Congratulations! You tapped Ved&apos;s photo 12 times and triggered the developer override. Type these secret codes directly into the navbar <span className="font-bold text-white">Command Center Search</span> (<kbd className="px-1.5 py-0.5 rounded bg-white/15 text-[10px] font-mono text-white">Ctrl + K</kbd>) to activate Easter Eggs:
+              </p>
+
+              {/* Codes list */}
+              <div className="space-y-3.5 mb-6">
+                {/* 1. Antigravity */}
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-brand-500/20 transition-all flex items-start gap-4">
+                  <div className="p-2 bg-brand-500/10 text-brand-400 rounded-lg text-xs font-mono font-bold uppercase shrink-0">
+                    antigravity
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Zero Gravity Mode</h4>
+                    <p className="text-[11px] text-gray-400 mt-0.5 leading-relaxed">Defies browser gravity! Causes every block and section on the platform to float and sway weightlessly.</p>
+                  </div>
+                </div>
+
+                {/* 2. Drum Solo */}
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-purple-500/20 transition-all flex items-start gap-4">
+                  <div className="p-2 bg-purple-500/10 text-purple-400 rounded-lg text-xs font-mono font-bold uppercase shrink-0">
+                    solo
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Tone.js Drum solo</h4>
+                    <p className="text-[11px] text-gray-400 mt-0.5 leading-relaxed">Synthesizes and plays a live, fast snare-drum and tom-drum roll using advanced frequency sweep membranes.</p>
+                  </div>
+                </div>
+
+                {/* 3. Boss bypass */}
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-blue-500/20 transition-all flex items-start gap-4">
+                  <div className="p-2 bg-blue-500/10 text-blue-400 rounded-lg text-xs font-mono font-bold uppercase shrink-0">
+                    ved
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Chief Founder Login</h4>
+                    <p className="text-[11px] text-gray-400 mt-0.5 leading-relaxed">Triggers a custom override greetings card for Ved and launches direct authentication to the CMS uploading panel.</p>
+                  </div>
+                </div>
+
+                {/* 4. Matrix Code */}
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-emerald-500/20 transition-all flex items-start gap-4">
+                  <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-xs font-mono font-bold uppercase shrink-0">
+                    matrix
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">falling digital rain</h4>
+                    <p className="text-[11px] text-gray-400 mt-0.5 leading-relaxed">Turns the backdrop of the command center into an glowing, animated green Matrix rain screen.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 rounded-2xl bg-brand-500/5 border border-brand-500/10 flex items-center gap-3">
+                <Info className="w-5 h-5 text-brand-400 shrink-0" />
+                <p className="text-[11px] text-brand-300/90 leading-normal">
+                  Copy any code, press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[9px]">Ctrl + K</kbd> to launch the command bar, paste the code, and press Enter to rock!
+                </p>
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   )
 }
