@@ -17,39 +17,39 @@ interface CustomPack {
 const DEFAULT_PACKS = [
   { 
     id: "default-1", 
-    title: "Vintage Funk Breakbeats", 
-    creator: "DrumShuffle Studio", 
-    genre: "Funk", 
-    description: "Meticulously captured vintage breaks, high-end snare snap, and authentic analog warmth.",
-    archiveUrl: "https://archive.org",
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop" 
+    title: "Infinite Sample Pack", 
+    creator: "SoundPacks", 
+    genre: "Hip Hop", 
+    description: "Infinite Sample Pack contains a curated selection of 377 professional drum loops, atmospheric synths, deep baseline chops, and punchy drum shots.",
+    archiveUrl: "https://soundpacks.com/free-sound-packs/infinite-sample-pack/",
+    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop" 
   },
   { 
     id: "default-2", 
-    title: "Modern Metal Foundry", 
-    creator: "DrumShuffle Studio", 
-    genre: "Metal", 
-    description: "Thunderous acoustic kicks, aggressive high-gain tom fills, and custom room ambience layers.",
-    archiveUrl: "https://archive.org",
-    image: "https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=800&auto=format&fit=crop" 
+    title: "Nightmare Fantasia", 
+    creator: "SoundPacks", 
+    genre: "Metal", // Map to existing Metal category or Lo-Fi/Synthwave
+    description: "Dark, cinematic, eerie and beautiful soundscapes, heavy industrial kicks, processed claps, and haunting phantom percussion.",
+    archiveUrl: "https://soundpacks.com/free-sound-packs/nightmare-fantasia-sample-pack/",
+    image: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800&auto=format&fit=crop" 
   },
   { 
     id: "default-3", 
-    title: "Lo-Fi Hip-Hop Chops", 
-    creator: "DrumShuffle Studio", 
-    genre: "Lo-Fi", 
-    description: "Chunky vinyl-sampled kick-snare duos, warm dusty hi-hat swings, and vintage rim shots.",
-    archiveUrl: "https://archive.org",
-    image: "https://images.unsplash.com/photo-1600865768224-b52fcce0f423?q=80&w=800&auto=format&fit=crop" 
+    title: "Let's Go to Space", 
+    creator: "SoundPacks", 
+    genre: "Synthwave", 
+    description: "Cosmic, spacious atmospheric pads, futuristic synth leads, alien riser FXs, and cybernetic drum patterns.",
+    archiveUrl: "https://soundpacks.com/free-sound-packs/lets-go-to-space-sample-pack/",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" 
   },
   { 
     id: "default-4", 
-    title: "Electronic Synthwave Kit", 
-    creator: "DrumShuffle Studio", 
-    genre: "Synthwave", 
-    description: "Punchy gated reverbs, crisp digital synthesis, and classic synth drum sound design elements.",
-    archiveUrl: "https://archive.org",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" 
+    title: "377 Drum Loops", 
+    creator: "SoundPacks", 
+    genre: "Hip Hop", 
+    description: "377 classic acoustic and electronic drum loops recorded across a range of tempos from 60 to 180 BPM.",
+    archiveUrl: "https://soundpacks.com/free-sound-packs/377-drum-loops/",
+    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=800&auto=format&fit=crop" 
   },
 ]
 

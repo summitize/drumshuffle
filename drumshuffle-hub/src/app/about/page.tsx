@@ -15,6 +15,11 @@ export default function AboutPage() {
     { text: '100 Subscribers', completed: true },
     { text: '500 Subscribers', completed: false },
     { text: '1000 Subscribers', completed: false },
+    { text: '5k Subscribers', completed: false },
+    { text: '10k Subscribers', completed: false },
+    { text: '50k Subscribers', completed: false },
+    { text: '100k Subscribers', completed: false },
+    { text: '1M Subscribers', completed: false },
   ]
 
   const passions = [
@@ -56,7 +61,7 @@ export default function AboutPage() {
       <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header Section */}
         <div className="text-center mb-16">
           <motion.div
@@ -70,7 +75,7 @@ export default function AboutPage() {
             </div>
             <span className="text-sm font-bold text-brand-400 tracking-[0.2em] uppercase">About Me</span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,7 +88,7 @@ export default function AboutPage() {
 
         {/* Main Grid: Info & Photo */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
-          
+
           {/* Photo Frame Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -91,13 +96,13 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 flex justify-center"
           >
-            <div 
+            <div
               onClick={handleImageTap}
               className="relative group cursor-pointer active:scale-98 transition-transform duration-300"
             >
               {/* Outer Neon Glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-r from-brand-500 via-purple-600 to-blue-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
-              
+
               {/* Main Photo Container */}
               <div className="relative w-80 h-96 sm:w-96 sm:h-[480px] rounded-3xl overflow-hidden border border-white/10 bg-black/40 backdrop-blur-xl">
                 <Image
@@ -115,10 +120,10 @@ export default function AboutPage() {
                     Secrets unlocking: {tapCount}/12
                   </div>
                 )}
-                
+
                 {/* Overlay Shimmer */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-transparent" />
-                
+
                 {/* Kit Tag */}
                 <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
                   <p className="text-xs text-brand-300 font-semibold tracking-wider uppercase mb-1">Alesis Nitro Max</p>
@@ -161,16 +166,15 @@ export default function AboutPage() {
                 <Target className="w-5 h-5 text-purple-400" />
                 Subscriber Milestones
               </h3>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 {milestones.map((m, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${
-                      m.completed 
-                        ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-300' 
-                        : 'bg-white/5 border-white/5 text-night-400'
-                    }`}
+                  <div
+                    key={idx}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${m.completed
+                      ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-300'
+                      : 'bg-white/5 border-white/5 text-night-400'
+                      }`}
                   >
                     {m.completed ? (
                       <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
@@ -229,7 +233,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            
+
             {/* 1. Drums */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -247,10 +251,10 @@ export default function AboutPage() {
                   <span className="font-semibold text-white">Alesis Nitro Max</span> – Premium 8-piece electronic setup featuring highly responsive, ultra-quiet mesh heads and the ultimate BFD drum module.
                 </p>
               </div>
-              <a 
-                href="https://www.amazon.com/Alesis-Nitro-Max-Kit-Electronic/dp/B0CG7G4N6H" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.amazon.com/Alesis-Nitro-Max-Kit-Electronic/dp/B0CG7G4N6H"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs font-bold text-brand-400 hover:text-brand-300 transition-colors mt-auto"
               >
                 Purchase E-Drum Kit
@@ -275,10 +279,10 @@ export default function AboutPage() {
                   <span className="font-semibold text-white">OnePlus 5</span> – High-fidelity (A5000 6/64 config) dual camera configuration for capturing clean, high frame-rate drumming practice videos.
                 </p>
               </div>
-              <a 
-                href="https://www.gsmarena.com/oneplus_5-8647.php" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.gsmarena.com/oneplus_5-8647.php"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors mt-auto"
               >
                 View Specifications
@@ -303,10 +307,10 @@ export default function AboutPage() {
                   <span className="font-semibold text-white">iRig 1</span> – High-fidelity analog guitar/instrument interface used for routing clean stereo drum module audio output directly to mobile camera recordings.
                 </p>
               </div>
-              <a 
-                href="https://www.amazon.com/IK-Multimedia-iRig-guitar-interface/dp/B003WODY72" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.amazon.com/IK-Multimedia-iRig-guitar-interface/dp/B003WODY72"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors mt-auto"
               >
                 iRig Amazon Link
@@ -375,10 +379,10 @@ export default function AboutPage() {
                   <span className="font-semibold text-white">Universal Mount</span> – Sturdy locking mount phone holder with rotating capability to keep OnePlus 5 perfectly secured to the tripod frame.
                 </p>
               </div>
-              <a 
-                href="https://amzn.in/d/05juRSid" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://amzn.in/d/05juRSid"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors mt-auto"
               >
                 Purchase Phone Holder
@@ -396,28 +400,28 @@ export default function AboutPage() {
             Check out my drum covers, drop a comment, or reach out directly via our contact channels.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a 
-              href="https://youtube.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-bold transition-colors flex items-center gap-2 shadow-lg shadow-red-600/20"
             >
               <Youtube className="w-5 h-5 fill-current" />
               Subscribe on YouTube
             </a>
-            <a 
-              href="https://www.discord.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.discord.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-xl font-bold transition-colors flex items-center gap-2 shadow-lg shadow-[#5865F2]/20"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36">
-                <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.45-5c1,.73,2,1.48,3,2.2a74.77,74.77,0,0,0,91.9,0c1-.72,2-1.47,3-2.2a68.86,68.86,0,0,1-10.44,5,77.26,77.26,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31-18.83C129,54.65,122.54,31.58,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/>
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.45-5c1,.73,2,1.48,3,2.2a74.77,74.77,0,0,0,91.9,0c1-.72,2-1.47,3-2.2a68.86,68.86,0,0,1-10.44,5,77.26,77.26,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31-18.83C129,54.65,122.54,31.58,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z" />
               </svg>
               Join Our Discord
             </a>
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-xl font-bold transition-all"
             >
               Contact Me
