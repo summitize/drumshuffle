@@ -1,4 +1,4 @@
-﻿:root[data-theme="light"] {
+:root[data-theme="light"] {
     --bg-base: #f0f2f5;
     --bg-blob-1: rgba(0, 122, 255, 0.4);
     --bg-blob-2: rgba(52, 199, 89, 0.4);
@@ -673,3 +673,380 @@ main {
     box-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
 }
 
+/* --- Socials & Google Wallet Passes Styling --- */
+.nav-socials-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.nav-new-badge {
+    background: linear-gradient(135deg, #ff375f, #ff9f0a);
+    color: #fff !important;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    vertical-align: middle;
+    box-shadow: 0 2px 8px rgba(255, 55, 95, 0.4);
+    animation: badge-pulse 2s infinite alternate;
+}
+@keyframes badge-pulse {
+    0% { transform: scale(1); box-shadow: 0 2px 6px rgba(255, 55, 95, 0.4); }
+    100% { transform: scale(1.06); box-shadow: 0 3px 12px rgba(255, 55, 95, 0.7); }
+}
+
+.wallet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 10px 0;
+    perspective: 1000px; /* Enable 3D effects */
+}
+
+/* Wallet Card Main Pass */
+.wallet-card {
+    height: 440px;
+    border-radius: 24px;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s ease;
+}
+.wallet-card:hover {
+    transform: translateY(-12px) rotateX(6deg) rotateY(-4deg) scale(1.02);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+/* Pass shine reflection overlay */
+.wallet-pass-shine {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.1) 100%);
+    pointer-events: none;
+    z-index: 5;
+    transition: transform 0.6s ease;
+}
+.wallet-card:hover .wallet-pass-shine {
+    transform: translate(10px, 10px);
+}
+
+/* Color Styles (Dynamic Gradients) */
+.gradient-red {
+    background: linear-gradient(135deg, #e52d27 0%, #b31217 100%);
+}
+.gradient-indigo {
+    background: linear-gradient(135deg, #5865f2 0%, #2f3ab2 100%);
+}
+.gradient-sunset {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+.gradient-green {
+    background: linear-gradient(135deg, #1db954 0%, #127c36 100%);
+}
+.gradient-dark {
+    background: linear-gradient(135deg, #2b2b2b 0%, #111111 100%);
+}
+.gradient-gold {
+    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    color: #111111 !important;
+}
+.gradient-gold .wallet-card-brand span,
+.gradient-gold .wallet-card-label,
+.gradient-gold .wallet-card-username,
+.gradient-gold .field-label,
+.gradient-gold .field-value {
+    color: #111111 !important;
+}
+.gradient-gold svg {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+    stroke: #111111 !important;
+}
+
+/* Wallet Pass Parts */
+.wallet-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-bottom: 15px;
+    z-index: 2;
+}
+.wallet-card-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.wallet-card-brand img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+.wallet-card-brand span {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+}
+.wallet-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wallet-card-icon svg, .wallet-card-icon i {
+    width: 28px;
+    height: 28px;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2;
+}
+
+.wallet-card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 0;
+    z-index: 2;
+}
+.wallet-card-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2px;
+}
+.wallet-card-username {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    word-break: break-all;
+    line-height: 1.2;
+}
+.wallet-card-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.wallet-field {
+    display: flex;
+    flex-direction: column;
+}
+.field-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+.field-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.wallet-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    z-index: 2;
+}
+.wallet-qr-container {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+.wallet-qr-container:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+.wallet-qr-code {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+.wallet-qr-code svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* --- Admin Panel Modal Styling & Form --- */
+.modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    z-index: 100;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.modal-close-btn:hover {
+    color: #ff375f;
+    transform: scale(1.1);
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 35px;
+}
+@media (max-width: 768px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-card-editor, .admin-cards-list {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.dynamic-field-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.dynamic-field-row input {
+    margin-bottom: 0 !important;
+    padding: 8px 10px !important;
+    font-size: 0.9rem !important;
+}
+.remove-field-btn {
+    background: rgba(255, 59, 48, 0.1);
+    color: #ff3b30;
+    border: 1px solid rgba(255, 59, 48, 0.2);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.remove-field-btn:hover {
+    background: #ff3b30;
+    color: #fff;
+}
+
+/* Admin Passes list */
+.admin-pass-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 12px 15px;
+    transition: all 0.2s ease;
+}
+.admin-pass-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(3px);
+}
+.admin-pass-item-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.admin-pass-item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+.admin-pass-item-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+}
+.admin-pass-item-text h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.admin-pass-item-text p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.delete-pass-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.delete-pass-btn:hover {
+    background: rgba(255, 59, 48, 0.1);
+    color: #ff3b30;
+}
+
+/* Toast Notifications */
+.ds-toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--glass-shadow);
+    color: var(--text-primary);
+    font-weight: 600;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+.ds-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+.ds-toast-success {
+    border-left: 4px solid #30d158;
+}
+.ds-toast-error {
+    border-left: 4px solid #ff3b30;
+}

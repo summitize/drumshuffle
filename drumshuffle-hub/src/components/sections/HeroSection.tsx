@@ -72,7 +72,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl text-night-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light"
           >
-            The Official Drumshuffle Wensite, DrumshuffleHub. Built from scratch with no experience of coding. Utilities for all drummers like metronome, drum simulator, drum covers, song notations and much more all in one place, that too for absolutely no fees.
+            The Official Drumshuffle Website, DrumshuffleHub. Built from scratch with no experience of coding. Utilities for all drummers like metronome, drum simulator, drum covers, song notations and much more all in one place, that too for absolutely no fees.
           </motion.p>
 
           {/* CTA Buttons */}

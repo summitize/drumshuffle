@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 
 <head>
@@ -35,6 +35,7 @@
                     <a href="#hero">Home</a>
                     <a href="#simulator">Simulator</a>
                     <a href="#videos">Videos</a>
+                    <a href="#socials" class="nav-socials-link">Socials <span class="nav-new-badge">New</span></a>
                     <a href="#feedback">Feedback</a>
                     <button id="theme-toggle" aria-label="Toggle Theme">
                         <i data-feather="moon" id="theme-icon"></i>
@@ -223,6 +224,15 @@
             </div>
         </section>
 
+        <!-- Socials Section -->
+        <section id="socials" class="simulator-section">
+            <h2 class="section-title">My Digital Wallet</h2>
+            <p class="simulator-hint" style="margin-bottom: 25px;">Interact with my social media profiles styled as wallet passes. Hover to slide, tap a card to visit, or click the QR code to expand.</p>
+            <div id="socials-container" class="wallet-grid">
+                <!-- Dynamically populated social wallet cards -->
+            </div>
+        </section>
+
         <!-- Videos Section -->
         <section id="videos" class="videos-section">
             <h2 class="section-title">Latest & Greatest</h2>
@@ -282,18 +292,152 @@
 
     </main>
 
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="modal hidden">
+        <div class="modal-content liquid-card">
+            <button class="modal-close-btn" id="close-admin-login-btn">&times;</button>
+            <h3 class="gradient-text text-center" style="font-size: 1.8rem; margin-bottom: 20px;">Admin Login</h3>
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-email">Email</label>
+                    <input type="email" id="admin-email" placeholder="vedsumeet7@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <div id="admin-login-error" class="hidden" style="color: #ff3b30; text-align: center; margin-top: 15px; font-weight: 600;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel-modal" class="modal hidden">
+        <div class="modal-content liquid-card admin-panel-content" style="max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto;">
+            <button class="modal-close-btn" id="close-admin-panel-btn">&times;</button>
+            <h2 class="gradient-text" style="font-size: 2.2rem; margin-bottom: 10px;">Drumshuffle Wallet Admin</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px;">Manage the social passes on your profile card deck.</p>
+            
+            <div class="admin-grid">
+                <!-- Left: Form to Add/Edit pass -->
+                <div class="admin-card-editor">
+                    <h3 style="margin-bottom: 15px; font-size: 1.3rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 5px;">Create Social Pass</h3>
+                    <form id="add-social-form">
+                        <div class="form-group">
+                            <label for="social-platform">Platform Name</label>
+                            <input type="text" id="social-platform" placeholder="e.g. YouTube, Instagram" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="social-username">Username</label>
+                            <input type="text" id="social-username" placeholder="e.g. @vedbub" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="social-url">Profile URL</label>
+                            <input type="url" id="social-url" placeholder="https://youtube.com/..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Icon Type</label>
+                            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <label style="display:flex; align-items:center; gap:5px; font-weight:normal; cursor:pointer;">
+                                    <input type="radio" name="icon-source" value="preset" checked> Preset Icon
+                                </label>
+                                <label style="display:flex; align-items:center; gap:5px; font-weight:normal; cursor:pointer;">
+                                    <input type="radio" name="icon-source" value="custom"> Custom Vector SVG
+                                </label>
+                            </div>
+                            
+                            <div id="preset-icon-container">
+                                <select id="social-icon-preset" class="kit-dropdown w-100" style="padding:10px; border-radius:8px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:var(--text-primary); margin-top:0;">
+                                    <option value="youtube" style="color:black;">YouTube</option>
+                                    <option value="instagram" style="color:black;">Instagram</option>
+                                    <option value="discord" style="color:black;">Discord</option>
+                                    <option value="bandlab" style="color:black;">BandLab</option>
+                                    <option value="twitter" style="color:black;">Twitter/X</option>
+                                    <option value="spotify" style="color:black;">Spotify</option>
+                                    <option value="twitch" style="color:black;">Twitch</option>
+                                    <option value="globe" style="color:black;">Custom Website</option>
+                                </select>
+                            </div>
+                            
+                            <div id="custom-icon-container" class="hidden">
+                                <textarea id="social-icon-custom" rows="3" placeholder="Paste inline SVG markup here (e.g. <svg ...>...</svg>)" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:var(--text-primary); font-family:monospace; font-size:0.85rem; outline:none;"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Pass Color Style</label>
+                            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                                <select id="color-preset" class="kit-dropdown" style="padding:10px; border-radius:8px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:var(--text-primary); margin-top:0; flex-grow: 1;">
+                                    <option value="gradient-red" style="color:black;">Red Velvet Gradient</option>
+                                    <option value="gradient-indigo" style="color:black;">Indigo Cosmic Gradient</option>
+                                    <option value="gradient-sunset" style="color:black;">Sunset Orange Gradient</option>
+                                    <option value="gradient-green" style="color:black;">Emerald Mint Gradient</option>
+                                    <option value="gradient-dark" style="color:black;">Midnight Carbon Gradient</option>
+                                    <option value="gradient-gold" style="color:black;">Liquid Gold Gradient</option>
+                                    <option value="custom" style="color:black;">Custom Solid Color</option>
+                                </select>
+                                <input type="color" id="social-color-custom" value="#0a84ff" class="hidden" style="width: 45px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: transparent; padding: 0;">
+                            </div>
+                        </div>
+                        
+                        <!-- Dynamic Fields Section -->
+                        <div class="form-group">
+                            <label style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                                <span>Pass Details (Custom Fields)</span>
+                                <button type="button" id="add-field-btn" class="btn btn-glass" style="padding: 4px 8px; font-size: 0.8rem; border-radius: 6px; gap: 3px;">
+                                    <i data-feather="plus" style="width:12px; height:12px;"></i> Add Field
+                                </button>
+                            </label>
+                            <div id="custom-fields-editor" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+                                <!-- Dynamically added fields -->
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100" style="margin-top:20px;">
+                            <i data-feather="plus"></i> Add Pass to Wallet
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Right: Active Cards Management -->
+                <div class="admin-cards-list">
+                    <h3 style="margin-bottom: 15px; font-size: 1.3rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 5px;">Active Passes</h3>
+                    <div id="admin-passes-list-container" style="display:flex; flex-direction:column; gap:10px; overflow-y:auto; max-height: 500px; padding-right: 5px;">
+                        <!-- JS renders quick passes here with a delete button -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expanded QR Code Modal -->
+    <div id="qr-modal" class="modal hidden">
+        <div class="modal-content liquid-card text-center" style="max-width: 400px; padding: 40px 30px;">
+            <button class="modal-close-btn" id="close-qr-btn">&times;</button>
+            <h3 id="qr-modal-title" class="gradient-text" style="font-size: 1.8rem; margin-bottom: 5px;">Scan pass</h3>
+            <p id="qr-modal-subtitle" style="color: var(--text-secondary); margin-bottom: 25px; font-size:0.9rem; font-weight:600;"></p>
+            <div id="qr-modal-code-container" style="background:#fff; padding:20px; border-radius:16px; display:inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 25px; width: 200px; height: 200px;">
+                <!-- QR Code dynamically injected here -->
+            </div>
+            <div>
+                <a id="qr-modal-link" href="#" target="_blank" class="btn btn-primary" style="width: 100%;">
+                    <i data-feather="external-link"></i> Visit Profile
+                </a>
+            </div>
+        </div>
+    </div>
+
     <footer class="glass-footer">
             <p>&copy; 2026 Drumshuffle. Artistic Branding & Professional Drumming Hub. <span class="site-version">v2.2.0</span></p>
     </footer>
 
     <!-- Modular JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <script type="module" src="app.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script defer src="store.js"></script>
+    <script defer src="socials.js"></script>
 </body>
 
 </html>
-
-
-
-

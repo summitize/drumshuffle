@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Drum, Github, Youtube, Music } from "lucide-react";
 import { SITE_NAME } from "@/lib/constants";
 
@@ -21,6 +24,10 @@ const FOOTER_SECTIONS = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <footer className="relative border-t border-white/[0.06] bg-night-950">
       {/* Top gradient line */}
