@@ -34,6 +34,11 @@
     --coffee-btn: #ff9f0a;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px; /* Offset for fixed 70px navbar to prevent title overlap */
+}
+
 * {
     margin: 0;
     padding: 0;

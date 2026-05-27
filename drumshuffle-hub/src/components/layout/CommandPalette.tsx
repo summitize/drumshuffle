@@ -88,11 +88,84 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
 
   // Antigravity gravity-free rotation & float trigger
   const triggerAntigravityFloat = () => {
-    // Add temporary floating class to document elements
+    if (typeof window === 'undefined') return
+
+    // Prevent duplicates
+    if (document.getElementById('antigravity-kill-btn')) return
+
     document.body.classList.add('antigravity-floating')
-    setTimeout(() => {
+
+    const killBtn = document.createElement('button')
+    killBtn.id = 'antigravity-kill-btn'
+    killBtn.innerHTML = `
+      <span style="display:flex; align-items:center; gap:8px;">
+        <span style="width: 8px; height: 8px; background: #ff3b30; border-radius: 50%; animation: kill-pulse 1s infinite alternate;"></span>
+        <span>Restore Gravity (Kill Process)</span>
+      </span>
+      <span style="font-weight: 800; font-size: 1.1rem; line-height: 1;">&times;</span>
+    `
+    
+    Object.assign(killBtn.style, {
+      position: 'fixed',
+      bottom: '30px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: '99999',
+      background: 'rgba(28, 28, 30, 0.85)',
+      backdropFilter: 'blur(20px)',
+      webkitBackdropFilter: 'blur(20px)',
+      border: '1px solid rgba(255, 255, 255, 0.15)',
+      color: '#fff',
+      padding: '12px 24px',
+      borderRadius: '30px',
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      cursor: 'pointer',
+      display: 'flex',
+      align-items: 'center',
+      justify-content: 'space-between',
+      gap: '15px',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255, 59, 48, 0.2)',
+      transition: 'all 0.3s ease',
+    })
+
+    if (!document.getElementById('kill-pulse-style')) {
+      const style = document.createElement('style')
+      style.id = 'kill-pulse-style'
+      style.innerHTML = `
+        @keyframes kill-pulse {
+          0% { opacity: 0.4; }
+          100% { opacity: 1; }
+        }
+      `
+      document.head.appendChild(style)
+    }
+
+    const cleanUp = () => {
       document.body.classList.remove('antigravity-floating')
-    }, 12000)
+      const el = document.getElementById('antigravity-kill-btn')
+      if (el) el.remove()
+    }
+
+    killBtn.addEventListener('click', cleanUp)
+    
+    // Hover effects
+    killBtn.addEventListener('mouseenter', () => {
+      killBtn.style.transform = 'translateX(-50%) translateY(-2px) scale(1.05)'
+      killBtn.style.boxShadow = '0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(255, 59, 48, 0.4)'
+      killBtn.style.borderColor = 'rgba(255, 59, 48, 0.5)'
+    })
+    killBtn.addEventListener('mouseleave', () => {
+      killBtn.style.transform = 'translateX(-50%)'
+      killBtn.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255, 59, 48, 0.2)'
+      killBtn.style.borderColor = 'rgba(255, 255, 255, 0.15)'
+    })
+
+    document.body.appendChild(killBtn)
+
+    // Run floating timer
+    setTimeout(cleanUp, 30000)
   }
 
   // Trigger synthesized Tone.js Drum Solo / Roll

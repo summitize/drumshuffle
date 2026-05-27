@@ -317,9 +317,20 @@
         <div class="modal-content liquid-card admin-panel-content" style="max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto;">
             <button class="modal-close-btn" id="close-admin-panel-btn">&times;</button>
             <h2 class="gradient-text" style="font-size: 2.2rem; margin-bottom: 10px;">Drumshuffle Wallet Admin</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 25px;">Manage the social passes on your profile card deck.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">Manage the social passes and read feedback on your hub.</p>
             
-            <div class="admin-grid">
+            <div class="admin-tab-bar" style="display:flex; gap:12px; border-bottom:1px solid var(--glass-border); padding-bottom:15px; margin-bottom:25px;">
+                <button type="button" id="admin-tab-socials" class="btn btn-primary" style="margin-top:0; padding: 8px 16px; font-size:0.9rem;">
+                    <i data-feather="credit-card" style="width:16px; height:16px;"></i> Social Passes
+                </button>
+                <button type="button" id="admin-tab-feedback" class="btn btn-glass" style="margin-top:0; padding: 8px 16px; font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                    <i data-feather="message-square" style="width:16px; height:16px;"></i> Feedback Inbox
+                    <span id="admin-feedback-badge" class="nav-new-badge" style="margin:0; padding:1px 5px; font-size:0.6rem; animation:none; display:none;">0</span>
+                </button>
+            </div>
+            
+            <!-- Tab 1: Social Cards Content -->
+            <div id="admin-content-socials" class="admin-grid">
                 <!-- Left: Form to Add/Edit pass -->
                 <div class="admin-card-editor">
                     <h3 style="margin-bottom: 15px; font-size: 1.3rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 5px;">Create Social Pass</h3>
@@ -406,6 +417,19 @@
                     <div id="admin-passes-list-container" style="display:flex; flex-direction:column; gap:10px; overflow-y:auto; max-height: 500px; padding-right: 5px;">
                         <!-- JS renders quick passes here with a delete button -->
                     </div>
+                </div>
+            </div>
+            
+            <!-- Tab 2: User Feedback Inbox Content -->
+            <div id="admin-content-feedback" class="hidden" style="animation: fadeIn 0.3s ease;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                    <h3 style="font-size: 1.3rem;">User Feedback Received</h3>
+                    <button type="button" id="clear-feedbacks-btn" class="btn btn-glass" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 8px; gap: 4px; color: #ff3b30; border-color: rgba(255, 59, 48, 0.2);">
+                        <i data-feather="trash-2" style="width:14px; height:14px;"></i> Clear Inbox
+                    </button>
+                </div>
+                <div id="admin-feedbacks-container" style="display:flex; flex-direction:column; gap:15px; max-height: 500px; overflow-y:auto; padding-right: 5px;">
+                    <!-- JS renders user feedbacks dynamically here -->
                 </div>
             </div>
         </div>

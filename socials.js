@@ -1,4 +1,4 @@
-// Drumshuffle Wallet Social Passes & Admin Panel Logic
+// Drumshuffle Wallet Social Passes, Feedback Hub & Admin Panel Logic
 document.addEventListener('DOMContentLoaded', () => {
     // Vector SVG Presets mapping
     const svgPresets = {
@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Local State
     let socialPasses = [];
+    let feedbacks = [];
 
     // Load passes from localStorage or load defaults
     function loadSocialPasses() {
@@ -103,14 +104,86 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('drumshuffle_social_cards', JSON.stringify(socialPasses));
     }
 
+    // Load feedbacks
+    function loadFeedbacks() {
+        const saved = localStorage.getItem('drumshuffle_feedbacks');
+        if (saved) {
+            try {
+                feedbacks = JSON.parse(saved);
+            } catch (e) {
+                console.error("Failed to parse feedbacks", e);
+                feedbacks = [];
+            }
+        } else {
+            // Seed a sample feedback if empty so it doesn't look blank
+            feedbacks = [
+                {
+                    id: 'fb_sample',
+                    name: 'Dave Grohl',
+                    email: 'dave@foofighters.com',
+                    message: 'Love your Alesis Nitro Max drum covers, especially the Foo Fighters ones! Keep hitting hard!',
+                    timestamp: new Date().toLocaleString()
+                }
+            ];
+            saveFeedbacks();
+        }
+        updateFeedbackBadge();
+    }
+
+    function saveFeedbacks() {
+        localStorage.setItem('drumshuffle_feedbacks', JSON.stringify(feedbacks));
+        updateFeedbackBadge();
+    }
+
+    function updateFeedbackBadge() {
+        const badge = document.getElementById('admin-feedback-badge');
+        if (!badge) return;
+
+        const count = feedbacks.length;
+        if (count > 0) {
+            badge.innerText = count;
+            badge.style.display = 'inline-block';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    // Capture homepage feedback submissions
+    const homeContactForm = document.getElementById('contact-form');
+    if (homeContactForm) {
+        homeContactForm.addEventListener('submit', () => {
+            const nameEl = document.getElementById('name');
+            const emailEl = document.getElementById('email');
+            const messageEl = document.getElementById('message');
+
+            if (nameEl && emailEl && messageEl) {
+                const name = nameEl.value.trim();
+                const email = emailEl.value.trim();
+                const message = messageEl.value.trim();
+
+                if (name && email && message) {
+                    const newFeedback = {
+                        id: 'fb_' + Date.now(),
+                        name,
+                        email,
+                        message,
+                        timestamp: new Date().toLocaleString()
+                    };
+
+                    feedbacks.push(newFeedback);
+                    saveFeedbacks();
+                    console.log("Feedback captured successfully!");
+                }
+            }
+        });
+    }
+
     // Generate local QR Code SVG using qrcode-generator
     function generateQrSvg(url) {
         try {
-            // Type 0 = auto type selector, Error correction 'M' (medium)
             const qr = qrcode(0, 'M');
             qr.addData(url);
             qr.make();
-            // Returns pure inline SVG string (cellSize = 3, margin = 0)
             return qr.createSvgTag(3, 0);
         } catch (e) {
             console.error("QR Code generation failed locally", e);
@@ -125,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.innerHTML = '';
 
-        socialPasses.forEach((pass, index) => {
+        socialPasses.forEach((pass) => {
             const card = document.createElement('div');
             
             // Setup card class and styles
@@ -305,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openAdminPanel() {
         hideAllModals();
         adminPanelModal.classList.remove('hidden');
+        switchTab('socials'); // default to socials tab
         renderAdminPassesList();
         
         // Clean and reset custom fields editor in the form
@@ -312,6 +386,34 @@ document.addEventListener('DOMContentLoaded', () => {
         fieldsEditor.innerHTML = '';
         addFieldEditorRow('PLATFORM', ''); // Always prefill standard Platform field
     }
+
+    // Tab Bar Toggling
+    const tabBtnSocials = document.getElementById('admin-tab-socials');
+    const tabBtnFeedback = document.getElementById('admin-tab-feedback');
+    const tabContentSocials = document.getElementById('admin-content-socials');
+    const tabContentFeedback = document.getElementById('admin-content-feedback');
+
+    function switchTab(tab) {
+        if (tab === 'socials') {
+            tabBtnSocials.className = 'btn btn-primary';
+            tabBtnFeedback.className = 'btn btn-glass';
+            tabContentSocials.classList.remove('hidden');
+            tabContentFeedback.classList.add('hidden');
+            renderAdminPassesList();
+        } else {
+            tabBtnSocials.className = 'btn btn-glass';
+            tabBtnFeedback.className = 'btn btn-primary';
+            tabContentSocials.classList.add('hidden');
+            tabContentFeedback.classList.remove('hidden');
+            renderFeedbackInbox();
+        }
+    }
+
+    tabBtnSocials.addEventListener('click', () => switchTab('socials'));
+    tabBtnFeedback.addEventListener('click', () => switchTab('socials-feedback')); // Wait, the id is 'socials-feedback' or just 'feedback'
+    
+    // Support toggle clicks properly
+    tabBtnFeedback.addEventListener('click', () => switchTab('feedback'));
 
     // Render active passes manager in Admin Panel
     function renderAdminPassesList() {
@@ -379,6 +481,87 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast(`${deletedPlatform} pass removed from wallet.`, "success");
         }
     }
+
+    // Render User Feedback Inbox list
+    function renderFeedbackInbox() {
+        const container = document.getElementById('admin-feedbacks-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        if (feedbacks.length === 0) {
+            container.innerHTML = `
+                <div style="text-align:center; padding:45px 20px; color:var(--text-secondary);">
+                    <i data-feather="inbox" style="width:48px; height:48px; margin-bottom:15px; opacity:0.3; stroke: var(--text-secondary);"></i>
+                    <p style="font-weight: 600;">Your Inbox is Empty</p>
+                    <p style="font-size:0.85rem; opacity:0.7; margin-top:5px;">Any feedback submissions from the homepage form will appear here dynamically!</p>
+                </div>
+            `;
+            if (window.feather) feather.replace();
+            return;
+        }
+
+        // Display feedbacks from newest to oldest
+        const sorted = [...feedbacks].reverse();
+        sorted.forEach(fb => {
+            const item = document.createElement('div');
+            item.className = 'admin-pass-item';
+            item.style.flexDirection = 'column';
+            item.style.alignItems = 'stretch';
+            item.style.gap = '10px';
+            item.style.padding = '18px';
+
+            item.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <strong style="font-size: 1.05rem; color: var(--text-primary);">${escapeHtml(fb.name)}</strong>
+                        <a href="mailto:${escapeHtml(fb.email)}" style="font-size:0.8rem; color:var(--accent); margin-left:12px; text-decoration:none; font-weight:600;">${escapeHtml(fb.email)}</a>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <span style="font-size:0.75rem; color:var(--text-secondary); opacity:0.8;">${fb.timestamp}</span>
+                        <button class="delete-feedback-btn delete-pass-btn" data-id="${fb.id}" title="Delete Feedback" style="padding:4px;">
+                            <i data-feather="trash-2" style="width:14px; height:14px;"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="background:rgba(0,0,0,0.2); padding:12px 15px; border-radius:10px; font-size:0.9rem; white-space:pre-wrap; border:1px solid rgba(255,255,255,0.03); color:var(--text-secondary); line-height:1.4;">${escapeHtml(fb.message)}</div>
+            `;
+
+            // Delete click listener
+            item.querySelector('.delete-feedback-btn').addEventListener('click', (e) => {
+                const fbId = e.currentTarget.getAttribute('data-id');
+                deleteFeedback(fbId);
+            });
+
+            container.appendChild(item);
+        });
+
+        if (window.feather) {
+            feather.replace();
+        }
+    }
+
+    // Delete a feedback
+    function deleteFeedback(id) {
+        const index = feedbacks.findIndex(f => f.id === id);
+        if (index > -1) {
+            feedbacks.splice(index, 1);
+            saveFeedbacks();
+            renderFeedbackInbox();
+            showToast("Feedback message deleted.", "success");
+        }
+    }
+
+    // Clear all feedbacks
+    document.getElementById('clear-feedbacks-btn').addEventListener('click', () => {
+        if (feedbacks.length === 0) return;
+        if (confirm("Are you sure you want to clear all feedback messages?")) {
+            feedbacks = [];
+            saveFeedbacks();
+            renderFeedbackInbox();
+            showToast("Feedback inbox cleared.", "success");
+        }
+    });
 
     // Form: Toggle color picker for custom solid colors
     const colorPresetSelect = document.getElementById('color-preset');
@@ -457,7 +640,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast("Invalid SVG! Custom vectors must start with '<svg' and end with '</svg>'", "error");
                 return;
             }
-            // Ensure classes or height/width don't break the pass container
             if (!iconCustom.includes('viewBox')) {
                 iconCustom = iconCustom.replace('<svg', '<svg viewBox="0 0 24 24"');
             }
@@ -475,7 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rows = customFieldsEditor.querySelectorAll('.dynamic-field-row');
         rows.forEach(row => {
             const inputs = row.querySelectorAll('input');
-            const label = inputs[0].value.trim().toUpperCase(); // Wallet fields are typically uppercase
+            const label = inputs[0].value.trim().toUpperCase();
             const value = inputs[1].value.trim();
             if (label && value) {
                 fields.push({ label, value });
@@ -505,7 +687,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset form & display success
         addSocialForm.reset();
         customFieldsEditor.innerHTML = '';
-        addFieldEditorRow('PLATFORM', platform); // auto prepopulate platform
+        addFieldEditorRow('PLATFORM', platform);
         
         // Hide custom elements
         customColorInput.classList.add('hidden');
@@ -526,7 +708,6 @@ document.addEventListener('DOMContentLoaded', () => {
         subtitle.innerText = `Scan to follow ${pass.username}`;
         container.innerHTML = generateQrSvg(pass.url);
         
-        // Ensure QR SVG expands beautifully inside the modal container
         const qrSvg = container.querySelector('svg');
         if (qrSvg) {
             qrSvg.setAttribute('width', '100%');
@@ -576,5 +757,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load
     loadSocialPasses();
+    loadFeedbacks();
     renderLandingCards();
 });
